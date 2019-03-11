@@ -1,0 +1,162 @@
+{% load staticfiles %}
+{% block content %}
+<html>
+  <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Applicant Info</title>
+        <link rel="stylesheet" href="static/blog.css">
+        <link rel="stylesheet" href="static/exp.css">       
+    </head>
+    <body>    
+		   <div>
+            <h1>Loan Details</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Amount</th>
+                        <th>Tenure</th>
+                        <th>Date of Application</th>
+                        <th>Purpose</th>
+                        <th>Frequency</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{Application_Details.Application_ID}}</td>
+                        <td>{{Application_Details.Amount}}</td>
+                        <td>{{Application_Details.Tenure}}</td>
+                        <td>{{Application_Details.Date_Application}}</td>
+                        <td>{{Application_Details.Purpose}}</td>
+                        <td>{{Application_Details.Frequency}}</td>
+                        <td>{{Application_Details.Status}}</td>
+                    </tr>
+                </tbody>
+            </table>      
+           </div>
+           <br>
+           <br>
+           <div>
+               <h1>Applicant Details</h1>
+               <table>
+                <thead>
+                    <tr>
+                        <th>ID </th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>PAN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{Applicant_Details.Applicant_ID}}</td>
+                        <td>{{Applicant_Details.Applicant_Name}}</td>
+                        <td>{{Applicant_Details.Applicant_Age}}</td>
+                        <td>{{Applicant_Details.Applicant_Gender}}</td>
+                        <td>{{Applicant_Details.Applicant_Mobile_No}}</td>
+                        <td>{{Applicant_Details.Applicant_Email}}</td>
+                        <td>{{Applicant_Details.Applicant_PAN}}</td>
+                    </tr>
+                </tbody>
+            </table>
+           </div>
+               <h3>Address</h3>
+               <table>
+                <thead>
+                    <tr>
+                        <th>House NO </th>
+                        <th>Street</th>
+                        <th>Locality</th>
+                        <th>City</th>
+                        <th>PinCode</th>
+                        <th>State</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{Applicant_Addr.A_House_No}}</td>
+                        <td>{{Applicant_Addr.A_Street}}</td>
+                        <td>{{Applicant_Addr.A_Locality}}</td>
+                        <td>{{Applicant_Addr.A_City}}</td>
+                        <td>{{Applicant_Addr.A_PINCode}}</td>
+                        <td>{{Applicant_Addr.A_State}}</td>
+                        <td>{{Applicant_Addr.A_Country}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <div>
+               <h1>Business Details</h1>
+               <table>
+                <thead>
+                    <tr>
+                        <th>ID </th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>PAN</th>
+                        <th>Contact</th>
+                        <th>Established Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{Business_Details.B_ID}}</td>
+                        <td>{{Business_Details.B_Type}}</td>
+                        <td>{{Business_Details.B_name}}</td>
+                        <td>{{Business_Details.B_PAN}}</td>
+                        <td>{{Business_Details.B_contact}}</td>
+                        <td>{{Business_Details.B_Estb}}</td>
+                    </tr>
+                </tbody>
+            </table>
+           </div>
+               <h3>Address</h3>
+               <table>
+                <thead>
+                    <tr>
+                        <th>House NO </th>
+                        <th>Street</th>
+                        <th>Locality</th>
+                        <th>City</th>
+                        <th>PinCode</th>
+                        <th>State</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{Business_Addr.B_House_No}}</td>
+                        <td>{{Business_Addr.B_Street}}</td>
+                        <td>{{Business_Addr.B_Locality}}</td>
+                        <td>{{Business_Addr.B_City}}</td>
+                        <td>{{Business_Addr.B_PINCode}}</td>
+                        <td>{{Business_Addr.B_State}}</td>
+                        <td>{{Business_Addr.B_Country}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            
+           <form action="" method="POST">
+            {% csrf_token %}
+           <button type="submit" name="Back" >Back</button>
+           <br>
+           <br>
+           <button type="submit" name="VerifyApplication">Verify Application</button>
+           <br>
+           <br>
+          <button type="submit" name="Reject">Reject Application</button>
+            <br>
+            <br>
+       </form>
+    </body>
+ </html>
+ {% endblock %}

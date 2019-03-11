@@ -1,0 +1,19 @@
+{% load staticfiles %}
+{% block content %}
+<html>
+  <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blacklist</title>
+        <link rel="stylesheet" href="static/blog.css">
+        <link rel="stylesheet" href="static/exp.css">       
+    </head>
+    <body>
+    	<h1>Application has been successfully blacklisted</h1>
+    	<br>
+    	<br>
+    	 <form action="" method="POST">
+            {% csrf_token %}
+    	<button type="submit" onclick="POST" name="view_apps">View Applications</button>
+    </body>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+  	<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>Documents</title>
+				<link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+			 <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
+			 <link rel="stylesheet" href="CSS/main.css">
+		</head>
+		<body>> 
+				<h1>Documents</h1>
+				<h1>{{what}}</h1>
+				<fieldset>
+					<form method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+					<br>
+					<label for="KTP">Upload KTP:</label>    			
+          			<input type="file" name="KTP">
+          			<br>
+          			<br>
+          			<label for="Family Card">Upload Family Card:</label>
+          			<input type="file" name="Family_Card">
+          			<br>
+          			<br>
+          			<label for="NPWP">Upload NPWP:</label>
+          			<input type="file" name="NPWP">
+          			<br>
+          			<br>
+          			<label for="BankStatement">Upload Bank Statement:</label>
+          			<input type="file" name="Bank_Statment">
+          			<br>
+          			<br>
+    				<button type="submit">Upload</button>
+
+          		</form>
+          	</fieldset>
+          </body>

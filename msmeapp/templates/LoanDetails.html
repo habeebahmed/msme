@@ -1,0 +1,89 @@
+{% load staticfiles %}
+
+  	<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>Loan Details</title>
+				<link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+			 <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
+			 <link rel="stylesheet" href="CSS/main.css">
+		</head>
+		<body>
+			<form action="" method="POST"> 
+				{% csrf_token %}
+				<h1>Loan Details</h1>
+				
+				<fieldset>
+					<!-- <div class="""slidecontainer">
+  					<input type="range" min="30000" max="100000" value="30000" class="slider" id="myRange" name="myRange"step='1000'>
+  					<p>Value: <span id="demo" ></span></p>
+					</div> -->
+					<label for="Amount">Amount:</label>
+					<input type="text" id="Amount" name="Amount">
+					<br>
+					<label for="Purpose">Purpose:</label>
+					<select name="Purpose" id="Purpose">
+  <option value="A">Expansion</option>
+  <option value="B">Capital</option>
+  <option value="C">Wages</option>
+</select>
+<label for="Tenure">Tenure(6-12m):</label>
+					<input type="text" id="Tenure" name="Tenure">
+					<br>
+					<label for="Frequency">Frequency:</label>
+					<input type="text" id="Frequency" name="Frequency">
+					<br>
+										<button type="submit" onsubmit="POST">Next</button>
+
+
+<!-- <script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script> -->
+<style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+</fieldset>
+</form>
+</body>

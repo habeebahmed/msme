@@ -1,0 +1,66 @@
+{% load staticfiles %}
+
+  	<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>Financial Details</title>
+				<link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+			 <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
+			 <link rel="stylesheet" href="CSS/main.css">
+		</head>
+		<body>
+			<form action="" method="POST"> 
+				{% csrf_token %}
+				<h1>Financial Details</h1>
+				
+				<fieldset>
+					<h2>Assets</h2>
+				<label for="Fixed Assets">Fixed Assets:</label>
+				<input type="text" id="Fixed_Assets" name="Fixed_Assets">
+				<br>
+				<label for="Inangible Assets">Intangible Assets:</label>
+				<input type="text" id="Intangible_Assets" name="Intangible_Assets">
+				<br>
+				<label for="Current Assets">Current Assets:</label>
+				<input type="text" id="Current_Assets" name="Current_Assets">
+				<br>
+				<label for="Non Current Assets">Non Current Assets:</label>
+				<input type="text" id="Non_Current_Assets" name="Non_Current_Assets">
+				<br>
+					<h2>Capital</h2>
+				<label for="Issued Capital">Issued Capital:</label>
+				<input type="text" id="Issued_Capital" name="Issued_Capital">
+				<br>
+				<label for="Paid Up Capital">Paid Up Capital:</label>
+				<input type="text" id="Paid_Up_Capital" name="Paid_Up_Capital">
+				<br>
+					<h2>Liabilities</h2>
+				<label for="Term Liabilities">Term Liabilities:</label>
+				<input type="text" id="Term_Liabilities" name="Term_Liabilities">
+				<br>
+				<label for="Current Liabilities">Current Liabilities:</label>
+				<input type="text" id="Current_Liabilities" name="Current_Liabilities">
+				<br>
+					<h2>Cash Flow</h2>
+				<label for="Operations Activities">Operations Activities:</label>
+				<input type="text" id="Operations_Activities" name="Operations_Activities">
+				<br>
+				<label for="Investing Activities">Investing Activities:</label>
+				<input type="text" id="Investing_Activities" name="Investing_Activities">
+				<br>
+				<label for="Financing Activities">Financing Activities:</label>
+				<input type="text" id="Financing_Activities" name="Financing_Activities">
+				<br>
+					<h2>Reserves</h2>
+				<label for="Subsidy from government">Subsidy from government:</label>
+				<input type="text" id="Subsidy_Gov" name="Subsidy_Gov">
+				<br>
+				<label for="General Reserves">General Reserves:</label>
+				<input type="text" id="General_Reserves" name="General_Reserves">
+				<br>
+     
+					<button type="button" onclick="POST">Back</button>
+					<button type="submit" onsubmit="POST">Next</button>
+				</form>
+
+		</body>

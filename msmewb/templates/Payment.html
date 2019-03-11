@@ -1,0 +1,26 @@
+{% load static %}
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="static/blog.css">
+    <link rel="stylesheet" href="static/exp.css">
+ </head>
+ <body>
+	<style>
+		
+	</style>
+ 	<form action="" method="POST">
+        {% csrf_token %}
+        <div>
+            Payment<br> 
+            S.I = {{Total_Amount}} <br>
+            C.I = {{Compund_Interest}}
+        </div>
+        <input type="hidden" name="appln_id" value={{application.Application_ID_id}}>
+        <button type="submit" name="Pay">Pay</button>
+    </form>
+
+
+ </body>

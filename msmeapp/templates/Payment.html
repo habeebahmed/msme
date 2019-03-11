@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Payment</title>
+    </head>
+    <body>
+        <h2>the total amount to paid is</h2>
+        <br>
+        <br>
+        <form method="POST" action="">
+        {% csrf_token %}
+            {{Total_Amount}}
+            <input type="hidden" name="application" value={{application.Application_ID_id}}>
+            <button type="submit" name="Pay">Pay</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{% load static %}
+{% block content %}
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Service DashBoard</title>
+    <link rel="stylesheet" href="static/blog.css">
+    <link rel="stylesheet" href="static/exp.css">
+ </head>
+ <body>
+ 	<form action="" method="POST">
+ 	{% csrf_token %}
+ 	<br><br><br><br><br><br><br><br><br><br><br>
+ 		<button type="submit" name="Edit">Edit Profile</button>
+ 		<br><br>
+ 		<button type="submit" name="View">View Loan Applications</button>
+ 		<br><br>
+ 	</form>
+ </body>
+
+{% endblock %}

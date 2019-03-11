@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+   <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+   <link rel="stylesheet" href="{% static 'CSS/blog.css' %}">
+</head>
+<body>
+    <form action="" method="POST">
+     {% csrf_token %}
+       <h1>Login</h1>
+
+       <fieldset>
+
+         <label for="Aid">Applicant ID:</label>
+         <input type="text" id="aid" name="aid">
+
+         <label for="password">Password:</label>
+         <input type="password" id="password" name="password">
+
+
+          <button type="submit" onsubmit="Post">Login</button>
+
+        </fieldset>
+
+   </form>
+</body>
