@@ -7,7 +7,9 @@
 body {
   font-family: 'Karla', sans-serif;
   color: #384047;
+  background-color: rgb(223, 223, 223);
 }
+
 
 form {
   font-family: 'Karla', sans-serif;
@@ -111,6 +113,17 @@ label.light {
   text-shadow: 0 1px 0 rgba(255,255,255,0.2);
   border-radius: 100%;
 }
+.progress{width:100%;margin:20px auto;text-align:center}
+.progress .circle,.progress .bar{position:relative;display:inline-block;background:#fff;width:40px;height:40px;border-radius:40px;border:1px solid #d5d5da}
+.progress .circle:not(:last-child){margin-right:80px;}
+.progress .bar{position:absolute;width:85px;height:6px;top:16px;left:40px;border-left:none;border-right:none;border-radius:0}
+.progress .circle .label{display:inline-block;width:32px;height:32px;line-height:32px;border-radius:32px;margin-top:4px;color:#b5b5ba;font-size:17px}
+.progress .circle .title{display:block;color:#b5b5ba;font-size:13px;line-height:30px;width:200px;margin-left:-80px;text-align:center}
+.progress .done .bar,.progress .circle.done{background:#eee}
+.progress .circle.done .label{color:#FFF;background:#8bc435}
+.progress .circle.done .title{color:#444}
+.progress .circle.active .label{color:#FFF;background:#0c95be}
+.progress .circle.active .title{color:#0c95be}
 
 @media screen and (min-width: 480px) {
 

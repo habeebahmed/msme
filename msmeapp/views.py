@@ -12,9 +12,14 @@ from .models import *
 from django.template.loader import render_to_string, get_template
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
+from .decorator import *
 template_html = '../templates/email.html'
 def Loan(request):#Application_Details
 	if request.method=="POST":
+		for key, value in request.POST.items():
+   			print('Key: %s' % (key) ) 
+   			# print(f'Key: {key}') in Python >= 3.7
+   			print('Value %s' % (value) )
 		Loan_app = Application_Details()
 		app = "APP"+str(random.randint(0,100))
 		Loan_app.Application_ID = app
@@ -26,10 +31,12 @@ def Loan(request):#Application_Details
 		Loan_app.Status = "IP"
 		Loan_app.save()
 		request.session['app'] = app
+		request.session['page'] = [1]
 		return redirect('Business')
 	return render(request,'LoanDetails.html',{})
 
 #Business_Details
+@user_progress(current_page=2)
 def Business(request):
 	if request.method=="POST":
 		bd=Business_Details()
@@ -53,10 +60,12 @@ def Business(request):
 		bad.B_State = request.POST.get("state")
 		bad.B_Country = request.POST.get("Country")
 		bad.save()
+		request.session['page'] += [2]
 		return redirect('Contact')
 	return render(request,'BusinessDetails.html',{})
 
 #Applicant_Details
+@user_progress(current_page=3)
 def Contact(request):
 	if request.method=="POST":
 		cd=Applicant_Details()
@@ -92,10 +101,12 @@ def Contact(request):
 		request.session['app_id']=app_id
 		request.session['email']=a_email
 		request.session['name']=n
+		request.session['page'] += [3]
 		return redirect('Financial')
 	return render(request,'ContactDetails.html',{})
 
 #Financials
+@user_progress(current_page=4)
 def Financial(request):
 	if request.method=="POST":
 		a = Assets()
@@ -172,10 +183,13 @@ def Financial(request):
 			a.save()
 			return HttpResponse("Your Application has been Blacklisted")
 		else:
+			request.session['page'] += [4]
 			return redirect('Documents')
+		
 	else:
 		return render(request,'FinancialDetails.html',{}) 
 
+@user_progress(current_page=5)
 def Documents(request):
 	if request.method=="POST":
 		fs = FileSystemStorage()
@@ -193,6 +207,9 @@ def Documents(request):
 		mail_subject="Loan Application Received"
 		message="Hello" + n + ". We have received your loan application. It is forwarded to our manual verification team and you can expect a decision within 3 working days. Your application ID is "+app+". Keep this ID for reference.     Thank you."
 		email=send_mail(mail_subject,message,'',[a_email1],fail_silently=False)
+		request.session['page'] += [5]
+		print(request.session['page'])
+		del request.session['page']
 		return HttpResponse("done")
 	return render(request,'Documents.html',{})
 
@@ -218,10 +235,15 @@ def LoginUser(request):
 	else:
 		return render(request,'LoginUser.html',{})
 
+@user_not_loggedin
 def DashBoard1(request):
 	# if request.method == "POST":
 	# 	applicant = Applicant_Details.objects.filter(Applicant_ID=Aid1)
 	# if request.method == "POST":
+	if request.method=="POST" and "Logout" in request.POST:
+		request.session.clear()
+		print("Loggedout")
+		return redirect('LoginUser')
 	Aid1 = request.session['a']
 	application = []
 	details = []
@@ -285,8 +307,11 @@ def DashBoard1(request):
 			html_message=html_content
 		)
 		return HttpResponse("Payment Link has been sent to your mail "+appln_id)
+	
+
 	return render(request,'DashBoard1.html',{"application": application})
 
+@user_not_loggedin
 def Payment(request):
 	if request.GET.get('appln_id') and request.method !="POST" :
 		print("In GET")

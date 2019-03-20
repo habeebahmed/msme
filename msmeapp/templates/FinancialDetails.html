@@ -9,6 +9,32 @@
 			 <link rel="stylesheet" href="CSS/main.css">
 		</head>
 		<body>
+			<div class="progress">
+			<div class="circle done"> <!--add the 'done' class for completed steps-->
+			<span class="label">1</span> <!--step number-->
+			<span class="title">Loan Details</span> <!--step title-->
+			<span class="bar"></span>
+			</div>
+			<div class="circle done"> <!--add the 'active' class for the current step-->
+			<span class="label">2</span>
+			<span class="title">Business Details</span>
+			<span class="bar"></span>
+			</div>
+			<div class="circle done"> <!--no added class for future steps-->
+			<span class="label">3</span>
+			<span class="title">Contact Details</span>
+			<span class="bar"></span>
+			</div>
+			<div class="circle active"> <!--add the 'done' class for completed steps-->
+			<span class="label">4</span> <!--step number-->
+			<span class="title">Financial Details</span> <!--step title-->
+			<span class="bar"></span>
+			</div>
+			<div class="circle"> <!--add the 'done' class for completed steps-->
+			<span class="label">5</span> <!--step number-->
+			<span class="title">Documents</span> <!--step title-->
+			</div>
+			</div>
 			<form action="" method="POST"> 
 				{% csrf_token %}
 				<h1>Financial Details</h1>
@@ -62,5 +88,6 @@
 					<button type="button" onclick="POST">Back</button>
 					<button type="submit" onsubmit="POST">Next</button>
 				</form>
+
 
 		</body>

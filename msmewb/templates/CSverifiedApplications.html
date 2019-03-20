@@ -10,7 +10,8 @@
     </head>
     <body>    
         <form action="" method="POST">
-                            {% csrf_token %}
+        {% csrf_token %}
+           <button type="button"><a href="{% url 'Logout' %}">Logout</a></button>
 		   <div>
             <table>
                 <thead>

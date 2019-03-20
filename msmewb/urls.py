@@ -18,5 +18,6 @@ urlpatterns = [
     path('ManagerApplications',views.ManagerApplications,name='ManagerApplications'),
     path('ManagerApplicationDetails',views.ManagerApplicationDetails,name='ManagerApplicationDetails'),
     path('ManagerReject',views.ManagerReject,name='ManagerReject'),
-    path('LoanApproved',views.LoanApproved,name='LoanApproved')
+    path('LoanApproved',views.LoanApproved,name='LoanApproved'),
+    path('Logout',views.Logout,name='Logout'),
 ]

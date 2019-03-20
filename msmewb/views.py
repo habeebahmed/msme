@@ -8,8 +8,11 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 import smtplib
 from django.core.mail import EmailMessage,send_mail
+from django.contrib.auth import logout
 import requests,json
+from .decorators import *
 
+@cs_not_loggedin
 def CustomerDashBoardWB(request):
 	if request.method == "POST" and "Edit" in request.POST:
 		return redirect('transfer')
@@ -18,6 +21,13 @@ def CustomerDashBoardWB(request):
 	return render(request,'CustomerDashboardWB.html',{})
 
 
+@user_not_loggedin
+def Logout(request):
+	logout(request)
+	# del request.session['username']
+	return redirect('LoginWB')
+
+@already_loggedin
 def LoginWB(request):
 	if request.method=="POST":
 		Eid1 = request.POST.get("eid")
@@ -32,6 +42,7 @@ def LoginWB(request):
 				t=0
 				break
 		if(t==0):
+			request.session['username'] = Eid1
 			if euid.Emp_ID[:2] == 'CS':
 				return redirect('CustomerDashBoardWB')
 			elif euid.Emp_ID[:2] == 'ST':
@@ -46,6 +57,7 @@ def LoginWB(request):
 	else:
 		return render(request,'LoginWB.html',{})
 
+@staff_not_loggedin
 def Staff(request):
 	if request.method == "POST" and "Edit" in request.POST:
 		return redirect('transfer')
@@ -53,6 +65,7 @@ def Staff(request):
 		return redirect('CSverifiedApplications')    
 	return render(request,'Staff.html',{})
 
+@staff_not_loggedin
 def CSverifiedApplications(request):
 	#a = Application_Details.objects.filter(Status='CS')
 	if request.method=="POST" and "DocumentVerification" in request.POST:
@@ -99,16 +112,19 @@ def CSverifiedApplications(request):
 	a = r.data		
 	return render(request,'CSverifiedApplications.html',{'applications': a})
 
+@staff_not_loggedin
 def DocumentsRejected(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('CSverifiedApplications')
 	return render(request,'DocumentsRejected.html')
 
+@staff_not_loggedin
 def DocumentsVerified(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('CSverifiedApplications')
 	return render(request,'DocumentsVerified.html')
 
+@manager_not_logedin
 def Manager(request):
 	if request.method == "POST" and "Edit" in request.POST:
 		return redirect('transfer')
@@ -116,6 +132,7 @@ def Manager(request):
 		return redirect('ManagerApplications')    
 	return render(request,'Manager.html',{})
 
+@manager_not_logedin
 def ManagerApplications(request):
 	#api call
 	#a = Application_Details.objects.filter(Status='DV')
@@ -129,6 +146,7 @@ def ManagerApplications(request):
 	a = r.data
 	return render(request,'ManagerApplications.html',{'applications':a})
 
+@manager_not_logedin
 def ManagerApplicationDetails(request):
 	if request.method=="POST" and "Back" in request.POST:
 		return redirect('ManagerApplications')
@@ -238,16 +256,19 @@ def ManagerApplicationDetails(request):
 def getDueDate(tenure):
 	return 	date.today() + relativedelta(months=+tenure)
 
+@manager_not_logedin
 def LoanApproved(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('ManagerApplications')
 	return render(request,'LoanApproved.html')
 
+@manager_not_logedin
 def ManagerReject(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('ManagerApplications')
 	return render(request,'ManagerReject.html')
 
+@cs_not_loggedin
 def CustomerDisplayApplications(request):
 	#api call
 	#a = Application_Details.objects.exclude(Status='BL')
@@ -261,6 +282,7 @@ def CustomerDisplayApplications(request):
 	a = r.data
 	return render(request,'CustomerDisplayApplications.html',{'applications': a})
 
+@cs_not_loggedin
 def CustomerDetails(request):
 	if request.method=="POST" and "Back" in request.POST:
 		return redirect('CustomerDisplayApplications')
@@ -292,15 +314,20 @@ def CustomerDetails(request):
 		app_details.save()
 		return redirect('ApplicationVerified')
 	return render(request,'CustomerDetails.html',{'Application_Details':app_details,'Applicant_Details':a_detail,'Applicant_Addr':a_addr,'Business_Details':b_detail,'Business_Addr':b_addr})
+
+@cs_not_loggedin
 def Reject(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('CustomerDisplayApplications')
 	return render(request,'Reject.html')
+
+
 def Blacklist(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('ManagerApplications')
 	return render(request,'Blacklist.html')
 
+@cs_not_loggedin
 def ApplicationVerified(request):
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('CustomerDisplayApplications')
