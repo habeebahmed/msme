@@ -1,371 +1,463 @@
 {% load staticfiles %}
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contact Details</title>
-        <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
-       <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
-       <link rel="stylesheet" href="CSS/main.css">
-        <script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Details</title>
+  <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
+  <link rel="stylesheet" href="CSS/main.css">
+  <script>
 
 
-function changeList(State,City){
-var ArunachalPradesh = new Array('','Along','Basar','Bomdila','Itanagar','Khonsa','Margherita');
-var AndhraPrdesh = new Array('','Vishakapatnam','Kurnool','Anantapur','Amaravati','Dharmavaram');
-var Assam = new Array('','Guwahati','Silchar','Dibrugarh','Jorhat','Nagaon','Tin sukia','Tezpur');
-var Bihar = new Array('','Patna','Purnia','katihar','Saharsa','Motihari','Sitamarhi');
-var Chhattisgarh = new Array('','Raipur','Bilaspur','Rajnandgaon','Ambikapur','Chirmiri','Dhamtari');
-var Goa = new Array('','Bicholim','Manpusa','Panaji','Quepem','Valpoi');
-var Gujarat = new Array('', 'Ahmedabad', 'Surat ', 'Vadodara', 'Rajkot');
-var Haryana = new Array('', 'Faridabad', 'Panipat', 'Ambala', 'Hisar');
-var HimachalPradesh = new Array('', 'Shimla', 'Manali', 'Dharamshala', 'Dalhousie');
-var JammuandKashmir = new Array('', 'Jammu', 'Srinagar', 'Leh', 'Gulmarg');
-var Jharkhand = new Array('', 'Jamshedpur', 'Ranchi', 'Dhanbad', 'Bokaro Steel City');
-var Karnataka = new Array('', 'Bengalore', 'Mangalore', 'Hubli', 'Belgaum');
-var Kerala = new Array('', 'Kochi', 'Thiruvananthapuram', 'Kollam', 'Kannur');
-var MadhyaPradesh = new Array('', 'Indore', 'Bhopal', 'Jabalpur', 'Gwalior');
-var Maharashtra = new Array('', 'Mumbai', 'Pune', 'Nagpur', 'Nasik');
-var Manipur = new Array('','Imphal East', 'Imphal West', 'Kakching', 'Bishnupur');
-var Meghalaya = new Array('', 'Shillong','Tura','Cherrapunji','Mawsynram');
-var Mizoram = new Array('', 'Aizawl','Champai','Linglei','Thenzawl');
-var Nagaland = new Array('','Kohima', 'Dimapur', 'Wokha','Tuensang');
-var Odisha = new Array ('', 'Bhusbaneswar','Cuttack', 'Sambalpur', 'Rourkela');
-var Punjab = new Array('', 'Chandigarh','Ludhiana', 'Jalandhar','Amritsar');
-var Rajasthan=new Array('','Jaipur','Jodhpur','Udaipur','Jaisalmer');
-var Sikkim = new Array('','Gangtok','Pelling','Lachung','Lachen');
-var TamilNadu = new Array('', 'Chennai', 'Coimbatore','Madurai','Ooty');
-var Telangana=new Array('', 'Hyderabad','Warangal','Khammam','Nizamabad');
-var Tripura=new Array('', 'Agartala', 'Dharmanagar','Amarpur', 'Kamalpur');
-var UttarPradesh = new Array('', 'Lucknow', 'Varanasi','Kanpur','Agra');
-var Uttarakhand=new Array('','Dehradun','Rishikesh','Haridwar','Mussoorie');
-var WestBengal=new Array('','Kolkata','Siliguri','Asansol','Kharagpur');
-switch (State.value)
-{case 'ArunachalPradesh':
- document.getElementById(City).options.length=0;
- for(i = 0; i<ArunachalPradesh.length; i++)
- {createOption(document.getElementById(City),ArunachalPradesh[i] , ArunachalPradesh[i]);}
-break;
-case 'AndhraPradesh':
- document.getElementById(City).options.length=0;
- for(i = 0; i<AndhraPradesh.length; i++)
- {createOption(document.getElementById(City),AndhraPradesh[i] , AndhraPradesh[i]);
-}
-break;
-case 'Assam':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Assam.length; i++)
- {createOption(document.getElementById(City),Assam[i] , Assam[i]);
-}
-break;
-case 'Bihar':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Bihar.length; i++)
- {createOption(document.getElementById(City),Bihar[i] ,Bihar[i]);
-}
-break;
-case 'Chhattisgarh':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Chhattisgarh.length; i++)
- {createOption(document.getElementById(City),Chhattisgarh[i] , Chhattisgarh[i]);
-}
+    function changeList(State, City) {
+      var ArunachalPradesh = new Array('', 'Along', 'Basar', 'Bomdila', 'Itanagar', 'Khonsa', 'Margherita');
+      var AndhraPrdesh = new Array('', 'Vishakapatnam', 'Kurnool', 'Anantapur', 'Amaravati', 'Dharmavaram');
+      var Assam = new Array('', 'Guwahati', 'Silchar', 'Dibrugarh', 'Jorhat', 'Nagaon', 'Tin sukia', 'Tezpur');
+      var Bihar = new Array('', 'Patna', 'Purnia', 'katihar', 'Saharsa', 'Motihari', 'Sitamarhi');
+      var Chhattisgarh = new Array('', 'Raipur', 'Bilaspur', 'Rajnandgaon', 'Ambikapur', 'Chirmiri', 'Dhamtari');
+      var Goa = new Array('', 'Bicholim', 'Manpusa', 'Panaji', 'Quepem', 'Valpoi');
+      var Gujarat = new Array('', 'Ahmedabad', 'Surat ', 'Vadodara', 'Rajkot');
+      var Haryana = new Array('', 'Faridabad', 'Panipat', 'Ambala', 'Hisar');
+      var HimachalPradesh = new Array('', 'Shimla', 'Manali', 'Dharamshala', 'Dalhousie');
+      var JammuandKashmir = new Array('', 'Jammu', 'Srinagar', 'Leh', 'Gulmarg');
+      var Jharkhand = new Array('', 'Jamshedpur', 'Ranchi', 'Dhanbad', 'Bokaro Steel City');
+      var Karnataka = new Array('', 'Bengalore', 'Mangalore', 'Hubli', 'Belgaum');
+      var Kerala = new Array('', 'Kochi', 'Thiruvananthapuram', 'Kollam', 'Kannur');
+      var MadhyaPradesh = new Array('', 'Indore', 'Bhopal', 'Jabalpur', 'Gwalior');
+      var Maharashtra = new Array('', 'Mumbai', 'Pune', 'Nagpur', 'Nasik');
+      var Manipur = new Array('', 'Imphal East', 'Imphal West', 'Kakching', 'Bishnupur');
+      var Meghalaya = new Array('', 'Shillong', 'Tura', 'Cherrapunji', 'Mawsynram');
+      var Mizoram = new Array('', 'Aizawl', 'Champai', 'Linglei', 'Thenzawl');
+      var Nagaland = new Array('', 'Kohima', 'Dimapur', 'Wokha', 'Tuensang');
+      var Odisha = new Array('', 'Bhusbaneswar', 'Cuttack', 'Sambalpur', 'Rourkela');
+      var Punjab = new Array('', 'Chandigarh', 'Ludhiana', 'Jalandhar', 'Amritsar');
+      var Rajasthan = new Array('', 'Jaipur', 'Jodhpur', 'Udaipur', 'Jaisalmer');
+      var Sikkim = new Array('', 'Gangtok', 'Pelling', 'Lachung', 'Lachen');
+      var TamilNadu = new Array('', 'Chennai', 'Coimbatore', 'Madurai', 'Ooty');
+      var Telangana = new Array('', 'Hyderabad', 'Warangal', 'Khammam', 'Nizamabad');
+      var Tripura = new Array('', 'Agartala', 'Dharmanagar', 'Amarpur', 'Kamalpur');
+      var UttarPradesh = new Array('', 'Lucknow', 'Varanasi', 'Kanpur', 'Agra');
+      var Uttarakhand = new Array('', 'Dehradun', 'Rishikesh', 'Haridwar', 'Mussoorie');
+      var WestBengal = new Array('', 'Kolkata', 'Siliguri', 'Asansol', 'Kharagpur');
+      switch (State.value) {
+        case 'ArunachalPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < ArunachalPradesh.length; i++) { createOption(document.getElementById(City), ArunachalPradesh[i], ArunachalPradesh[i]); }
+          break;
+        case 'AndhraPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < AndhraPradesh.length; i++) {
+            createOption(document.getElementById(City), AndhraPradesh[i], AndhraPradesh[i]);
+          }
+          break;
+        case 'Assam':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Assam.length; i++) {
+            createOption(document.getElementById(City), Assam[i], Assam[i]);
+          }
+          break;
+        case 'Bihar':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Bihar.length; i++) {
+            createOption(document.getElementById(City), Bihar[i], Bihar[i]);
+          }
+          break;
+        case 'Chhattisgarh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Chhattisgarh.length; i++) {
+            createOption(document.getElementById(City), Chhattisgarh[i], Chhattisgarh[i]);
+          }
 
-break;
-case 'Goa':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Goa.length; i++)
- {createOption(document.getElementById(City),Goa[i] , Goa[i]);
-}
-break;
-case 'Gujarat':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Gujarat.length; i++)
- {createOption(document.getElementById(City),Gujarat[i] , Gujarat[i]);
-}
-break;
-case 'Haryana':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Haryana.length; i++)
- {createOption(document.getElementById(City),Haryana[i] , Haryana[i]);
-}
-break;
-case 'HimachalPradesh':
- document.getElementById(City).options.length=0;
- for(i = 0; i<HimachalPradesh.length; i++)
- {createOption(document.getElementById(City),HimachalPradesh[i] , HimachalPradesh[i]);
-}
-break;
-case 'JammuandKashmir':
- document.getElementById(City).options.length=0;
- for(i = 0; i<JammuandKashmir.length; i++)
- {createOption(document.getElementById(City),JammuandKashmir[i] , JammuandKashmir[i]);
-}
-break;
-case 'Jharkhand':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Jharkhand.length; i++)
- {createOption(document.getElementById(City),Jharkhand[i] , Jharkhand[i]);
-}
-break;
-case 'Karnataka':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Karnataka.length; i++)
- {createOption(document.getElementById(City),Karnataka[i] , Karnataka[i]);
-}
-break;
-case 'Kerala':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Kerala.length; i++)
- {createOption(document.getElementById(City),Kerala[i] , Kerala[i]);
-}
-break;
-case 'MadhyaPradesh':
- document.getElementById(City).options.length=0;
- for(i = 0; i<MadhyaPradesh.length; i++)
- {createOption(document.getElementById(City),MadhyaPradesh[i] , MadhyaPradesh[i]);
-}
-break;
-case 'Maharashtra':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Maharashtra.length; i++)
- {createOption(document.getElementById(City),Maharashtra[i] , Maharashtra[i]);
-}
-break;
-case 'Manipur':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Manipur.length; i++)
- {createOption(document.getElementById(City),Manipur[i] , Manipur[i]);
-}
-break;
-case 'Meghalaya':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Meghalaya.length; i++)
- {createOption(document.getElementById(City),Meghalaya[i] , Meghalaya[i]);
-}
-break;
-case 'Nagaland':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Nagaland.length; i++)
- {createOption(document.getElementById(City),Nagaland[i] , Nagaland[i]);
-}
-break;
-case 'Odisha':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Odisha.length; i++)
- {createOption(document.getElementById(City),Odisha[i] , Odisha[i]);
-}
-break;
-case 'Punjab':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Punjab.length; i++)
- {createOption(document.getElementById(City),Punjab[i] , Punjab[i]);
-}
-break;
-case 'Rajasthan':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Rajasthan.length; i++)
- {createOption(document.getElementById(City),Rajasthan[i] , Rajasthan[i]);
-}
-break;
-case 'Sikkim':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Sikkim.length; i++)
- {createOption(document.getElementById(City),Sikkim[i] , Sikkim[i]);
-}
-break;
-case 'TamilNadu':
- document.getElementById(City).options.length=0;
- for(i = 0; i<TamilNadu.length; i++)
- {createOption(document.getElementById(City),TamilNadu[i] ,TamilNadu[i]);
-}
-break;
-case 'Telangana':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Telangana.length; i++)
- {createOption(document.getElementById(City),Telangana[i] , Telangana[i]);
-}
-break;
-case 'Tripura':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Tripura.length; i++)
- {createOption(document.getElementById(City),Tripura[i] , Tripura[i]);
-}
-break;
-case 'UttarPradesh':
- document.getElementById(City).options.length=0;
- for(i = 0; i<UttarPradesh.length; i++)
- {createOption(document.getElementById(City),UttarPradesh[i] , UttarPradesh[i]);
-}
-break;
-case 'Uttarakhand':
- document.getElementById(City).options.length=0;
- for(i = 0; i<Uttarakhand.length; i++)
- {createOption(document.getElementById(City),Uttarakhand[i] , Uttarakhand[i]);
-}
-break;
-case 'WestBengal':
- document.getElementById(City).options.length=0;
- for(i = 0; i<WestBengal.length; i++)
- {createOption(document.getElementById(City),WestBengal[i] , WestBengal[i]);
-}
-break;
-}
-}
-
-
-function createOption(State, text, value)
-{var opt = document.createElement('option');
- opt.value=value;
- opt.text=text;
- State.options.add(opt);
-}
+          break;
+        case 'Goa':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Goa.length; i++) {
+            createOption(document.getElementById(City), Goa[i], Goa[i]);
+          }
+          break;
+        case 'Gujarat':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Gujarat.length; i++) {
+            createOption(document.getElementById(City), Gujarat[i], Gujarat[i]);
+          }
+          break;
+        case 'Haryana':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Haryana.length; i++) {
+            createOption(document.getElementById(City), Haryana[i], Haryana[i]);
+          }
+          break;
+        case 'HimachalPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < HimachalPradesh.length; i++) {
+            createOption(document.getElementById(City), HimachalPradesh[i], HimachalPradesh[i]);
+          }
+          break;
+        case 'JammuandKashmir':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < JammuandKashmir.length; i++) {
+            createOption(document.getElementById(City), JammuandKashmir[i], JammuandKashmir[i]);
+          }
+          break;
+        case 'Jharkhand':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Jharkhand.length; i++) {
+            createOption(document.getElementById(City), Jharkhand[i], Jharkhand[i]);
+          }
+          break;
+        case 'Karnataka':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Karnataka.length; i++) {
+            createOption(document.getElementById(City), Karnataka[i], Karnataka[i]);
+          }
+          break;
+        case 'Kerala':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Kerala.length; i++) {
+            createOption(document.getElementById(City), Kerala[i], Kerala[i]);
+          }
+          break;
+        case 'MadhyaPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < MadhyaPradesh.length; i++) {
+            createOption(document.getElementById(City), MadhyaPradesh[i], MadhyaPradesh[i]);
+          }
+          break;
+        case 'Maharashtra':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Maharashtra.length; i++) {
+            createOption(document.getElementById(City), Maharashtra[i], Maharashtra[i]);
+          }
+          break;
+        case 'Manipur':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Manipur.length; i++) {
+            createOption(document.getElementById(City), Manipur[i], Manipur[i]);
+          }
+          break;
+        case 'Meghalaya':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Meghalaya.length; i++) {
+            createOption(document.getElementById(City), Meghalaya[i], Meghalaya[i]);
+          }
+          break;
+        case 'Nagaland':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Nagaland.length; i++) {
+            createOption(document.getElementById(City), Nagaland[i], Nagaland[i]);
+          }
+          break;
+        case 'Odisha':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Odisha.length; i++) {
+            createOption(document.getElementById(City), Odisha[i], Odisha[i]);
+          }
+          break;
+        case 'Punjab':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Punjab.length; i++) {
+            createOption(document.getElementById(City), Punjab[i], Punjab[i]);
+          }
+          break;
+        case 'Rajasthan':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Rajasthan.length; i++) {
+            createOption(document.getElementById(City), Rajasthan[i], Rajasthan[i]);
+          }
+          break;
+        case 'Sikkim':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Sikkim.length; i++) {
+            createOption(document.getElementById(City), Sikkim[i], Sikkim[i]);
+          }
+          break;
+        case 'TamilNadu':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < TamilNadu.length; i++) {
+            createOption(document.getElementById(City), TamilNadu[i], TamilNadu[i]);
+          }
+          break;
+        case 'Telangana':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Telangana.length; i++) {
+            createOption(document.getElementById(City), Telangana[i], Telangana[i]);
+          }
+          break;
+        case 'Tripura':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Tripura.length; i++) {
+            createOption(document.getElementById(City), Tripura[i], Tripura[i]);
+          }
+          break;
+        case 'UttarPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < UttarPradesh.length; i++) {
+            createOption(document.getElementById(City), UttarPradesh[i], UttarPradesh[i]);
+          }
+          break;
+        case 'Uttarakhand':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Uttarakhand.length; i++) {
+            createOption(document.getElementById(City), Uttarakhand[i], Uttarakhand[i]);
+          }
+          break;
+        case 'WestBengal':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < WestBengal.length; i++) {
+            createOption(document.getElementById(City), WestBengal[i], WestBengal[i]);
+          }
+          break;
+      }
+    }
 
 
-</script>
-    </head>
-    <body>
-      <div class="progress">
-      <div class="circle done"> <!--add the 'done' class for completed steps-->
-      <span class="label">1</span> <!--step number-->
-      <span class="title">Loan Details</span> <!--step title-->
+    function createOption(State, text, value) {
+      var opt = document.createElement('option');
+      opt.value = value;
+      opt.text = text;
+      State.options.add(opt);
+    }
+
+    function validate() {
+      var Name = document.getElementById("Name").value;
+      var namechk = /^[A-Za-z]{3,20}$/;
+      var mobile = document.getElementById("mobile").value;
+      var mnochk = /^[0-9]{10}$/;
+      var email = document.getElementById("email").value;
+      var emailchk = /^([a-zA-Z0-9_\.\-]{5,12})+\@([a-zA-Z]+\.)+([a-zA-Z]{2,4})+$/;
+      var pan = document.getElementById("pan").value;
+      var panchk = /^[A-Za-z0-9]{10}$/;
+      var age = document.getElementById("Age").value;
+      var hno = document.getElementById("HNO").value;
+      var hnochk = /^[0-9-\.\-]{1,10}$/;
+      var Street = document.getElementById("street").value;
+      var streetchk = /^[A-Za-z0-9]{3,15}$/;
+      var Area = document.getElementById("area").value;
+      var areachk = /^[A-Za-z0-9]{3,15}$/;
+      var City = document.getElementById("City").value;
+      var State = document.getElementById("State").value;
+      var Country = document.getElementById("country").value;
+      var pin = document.getElementById("pincode").value;
+      var pinchk = /^[0-9]{5,6}$/;
+      var male = document.getElementById("M").checked;
+      var female = document.getElementById("F").checked;
+      var Other = document.getElementById("O").checked;
+      if (Name == "" || mobile == "" || email == "" || pan == "" || HNO == "" || Street == "" || Area == "" || City == "" || State == "" || Country == "" || male == "false" || female == "false" || Other == "false" || pin == "") {
+        alert("please fill all the fields");
+        document.getElementById("Name").focus();
+        return false
+      }
+      else if (!namechk.test(Name)) {
+        alert("Invalid Name");
+        document.getElementById("Name").focus();
+        return false
+      }
+      else if (!mnochk.test(mobile)) {
+        alert("mobile number should consists of atleast and atmost 10 digits");
+        document.getElementById("mobile").focus();
+        return false
+      }
+      else if (!emailchk.test(email)) {
+        alert("invalid email id provided");
+        document.getElementById("email").focus();
+        return false
+      }
+      else if (!panchk.test(pan)) {
+        alert("pan number should be atleast and atmost 10 digits");
+        document.getElementById("pan").focus();
+        return false
+      }
+      else if (!hnochk.test(hno)) {
+        alert("invalid house number");
+        document.getElementById("HNO").focus();
+        return false
+      }
+      else if (!streetchk.test(Street)) {
+        alert("Street should contain 3-15 characters!");
+        document.getElementById("street").focus();
+        return false
+      }
+      else if (!areachk.test(Area)) {
+        alert("Area should contain 3-15 characters!");
+        document.getElementById("area").focus();
+        return false
+      }
+      else if (!pinchk.test(pin)) {
+        alert("Pincode should contain 5-6 digits");
+        document.getElementById("pincode").focus();
+        return false
+      }
+      else if (age < 20) {
+        alert("You are not eligible to take loan");
+        document.getElementById("age").focus();
+        return false
+      }
+
+      else {
+      return true
+      document.forms["Contact"].submit();
+      }
+
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="progress">
+    <div class="circle done">
+      <!--add the 'done' class for completed steps-->
+      <span class="label">1</span>
+      <!--step number-->
+      <span class="title">Loan Details</span>
+      <!--step title-->
       <span class="bar"></span>
-      </div>
-      <div class="circle done"> <!--add the 'active' class for the current step-->
+    </div>
+    <div class="circle done">
+      <!--add the 'active' class for the current step-->
       <span class="label">2</span>
       <span class="title">Business Details</span>
       <span class="bar"></span>
-      </div>
-      <div class="circle active"> <!--no added class for future steps-->
+    </div>
+    <div class="circle active">
+      <!--no added class for future steps-->
       <span class="label">3</span>
       <span class="title">Contact Details</span>
       <span class="bar"></span>
-      </div>
-      <div class="circle"> <!--add the 'done' class for completed steps-->
-      <span class="label">4</span> <!--step number-->
-      <span class="title">Financial Details</span> <!--step title-->
+    </div>
+    <div class="circle">
+      <!--add the 'done' class for completed steps-->
+      <span class="label">4</span>
+      <!--step number-->
+      <span class="title">Financial Details</span>
+      <!--step title-->
       <span class="bar"></span>
-      </div>
-      <div class="circle"> <!--add the 'done' class for completed steps-->
-      <span class="label">5</span> <!--step number-->
-      <span class="title">Documents</span> <!--step title-->
-      </div>
-      </div>
-      <form action="" method="POST" name="Contact">
-        {% csrf_token %}
-        <h1>Contact Details</h1>
-        
-        <fieldset>
+    </div>
+    <div class="circle">
+      <!--add the 'done' class for completed steps-->
+      <span class="label">5</span>
+      <!--step number-->
+      <span class="title">Documents</span>
+      <!--step title-->
+    </div>
+  </div>
+  <form action="" method="POST" onsubmit="return validate();" name="Contact">
+    {% csrf_token %}
+    <h1>Contact Details</h1>
+
+    <fieldset>
 
 
-          <label for="Name">Name:</label>
-          <input type="text" id="Name" name="Name">
-          <br>
+      <label for="Name">Name:</label>
+      <input type="text" id="Name" name="Name">
+      <br>
 
-          
-          <label for="Age">Age:</label>
-          <input type="Number" id="Age" name="Age">
-          <br>
-             
-          <br>
-          <label for="Gender">Gender:</label>
-          <input type="radio" name="gender" value="M"> Male&nbsp&nbsp
-          <input type="radio" name="gender" value="F"> Female&nbsp&nbsp
-          <input type="radio" name="gender" value="O"> Other&nbsp&nbsp
-          <br>
-          <br>
-          <br>
-          <label for="Mobile Number">Mobile Number:</label>
-          <br>
-          <input type="Number" id="mobile" name="mobile">
-          <br>
-          <br>
-          <label for="Email id">Email id:</label>
-          <br>
-          <input type="email" id="email" name="email">
-          <br>
 
-          <label for="PAN">PAN:</label>
-          <br>
-          <input type="text" id="pan" name="pan">
-          <br>
-          <label for="HNO">House No:</label>
-          <br>
-          <input type="text" id="HNO" name="HNO">
-          <br>
-          <label for="Area">Area:</label>
-          <br>
-          <input type="text" id="area" name="area">
-          <br>
-          <label for="Street">Street:</label>
-          <br>
-          <input type="text" id="street" name="street">
-          <br>
-          <label for="Pincode">Pincode:</label>
-          <br>
-          <input type="Number" id="pincode" name="pincode">
-          <br>
-          <label for="Country">Country:</label>
-          <br>
-          <br>
+      <label for="Age">Age:</label>
+      <input type="Number" id="Age" name="Age">
+      <br>
 
-          <select id="country" name="country">
-            <option value=""> </option>
-            <option value="India">India</option>
-          </select>
-          <br>
-          <br>
+      <br>
+      <label for="Gender">Gender:</label>
+      <input type="radio" name="gender" value="M"> Male&nbsp&nbsp
+      <input type="radio" name="gender" value="F"> Female&nbsp&nbsp
+      <input type="radio" name="gender" value="O"> Other&nbsp&nbsp
+      <br>
+      <br>
+      <br>
+      <label for="Mobile Number">Mobile Number:</label>
+      <br>
+      <input type="Number" id="mobile" name="mobile">
+      <br>
+      <br>
+      <label for="Email id">Email id:</label>
+      <br>
+      <input type="email" id="email" name="email">
+      <br>
 
-          <label for="State">State:</label>
-          <select id="State" name="state"onchange="changeList(this,'City'); ">
-            <option value=""> </option>
-            <option value="AndhraPradesh">Andhra Pradesh</option>
-            <option value="ArunachalPradesh">Arunachal Pradesh</option>
-            <option value="Assam">Assam</option>
-            <option value="Bihar">Bihar</option>
-            <option value="Chhattisgarh">Chhattisgarh</option>
-            <option value="Goa">Goa </option>
-            <option value="Gujarat">Gujarat</option>
-            <option value="Haryana">Haryana</option>
-            <option value="HimachalPradesh">Himachal Pradesh</option>
-            <option value="JammuandKashmir">Jammu and Kashmir</option>
-            <option value="Jharkhand">Jharkhand</option>
-            <option value="Karnataka">Karnataka</option>
-            <option value="Kerala">Kerala</option>
-            <option value="MadhyaPradesh">Madhya Pradesh</option>
-            <option value="Maharashtra">Maharashtra</option>
-            <option value="Manipur">Manipur</option>
-            <option value="Meghalaya">Meghalaya</option>
-            <option value="Nagaland">Nagaland</option>
-            <option value="Odisha">Odisha</option>
-            <option value="Punjab">Punjab</option>
-            <option value="Rajasthan">Rajasthan </option>
-            <option value="Sikkim">Sikkim</option>
-            <option value="TamilNadu">Tamil Nadu</option>
-            <option value="Telangana">Telangana</option>
-            <option value="Tripura">Tripura</option>
-            <option value="UttarPradesh">Uttar Pradesh</option>
-            <option value="Uttarakhand">Uttarakhand</option>
-            <option value="WestBengal">West Bengal</option>
-          </select>
+      <label for="PAN">PAN:</label>
+      <br>
+      <input type="text" id="pan" name="pan">
+      <br>
+      <label for="HNO">House No:</label>
+      <br>
+      <input type="text" id="HNO" name="HNO">
+      <br>
+      <label for="Area">Area:</label>
+      <br>
+      <input type="text" id="area" name="area">
+      <br>
+      <label for="Street">Street:</label>
+      <br>
+      <input type="text" id="street" name="street">
+      <br>
+      <label for="Pincode">Pincode:</label>
+      <br>
+      <input type="Number" id="pincode" name="pincode">
+      <br>
+      <label for="Country">Country:</label>
+      <br>
+      <br>
 
-          <br>
-
-          <label for="City">City:</label>
-          <br>
-          <select id="City" name="City">
+      <select id="country" name="country">
+        <option value=""> </option>
+        <option value="India">India</option>
       </select>
-          
-          <br>
+      <br>
+      <br>
 
-          
+      <label for="State">State:</label>
+      <select id="State" name="state" onchange="changeList(this,'City'); ">
+        <option value=""> </option>
+        <option value="AndhraPradesh">Andhra Pradesh</option>
+        <option value="ArunachalPradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa </option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="HimachalPradesh">Himachal Pradesh</option>
+        <option value="JammuandKashmir">Jammu and Kashmir</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="MadhyaPradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan </option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="TamilNadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="UttarPradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="WestBengal">West Bengal</option>
+      </select>
 
-          
+      <br>
+
+      <label for="City">City:</label>
+      <br>
+      <select id="City" name="City">
+      </select>
+
+      <br>
 
 
-        <button type="button" onclick="Post">Back</button>
-        <br><br>
-         <button type="submit" onsubmit="Post">Next</button>
-         <br>
-      </form>
 
-    </body>
+
+
+
+      <button type="button" onclick="Post">Back</button>
+      <br><br>
+      <button type="submit" onsubmit="Post">Next</button>
+      <br>
+  </form>
+
+</body>

@@ -216,6 +216,68 @@ opt.value=value;
 opt.text=text;
 State.options.add(opt);
 }
+function validate()
+{
+	var BusinessType = document.getElementById("BusinessType").value;
+	var Bmobile = document.getElementById("Bmobile").value;
+	var mnochk=/^[0-9]{10}$/;
+	var BPAN = document.getElementById("BPAN").value;
+	var panchk=/^[A-Za-z0-9]{10}$/;
+	var B_est = document.getElementById("B_est").value;
+	var HNO = document.getElementById("HNO").value;
+	var hnochk = /^[0-9-\.\-]{1,10}$/;
+	var area = document.getElementById("area").value;
+	var areachk = /^[A-Za-z0-9]{3,15}$/;
+	var pincode = document.getElementById("pincode").value;
+	var pinchk=/^[0-9]{5,6}$/;
+	var street = document.getElementById("street").value;
+	var streetchk = /^[A-Za-z0-9]{3,15}$/;
+	var state = document.getElementById("State").value;
+	var city = document.getElementById("City").value;
+	var country = document.getElementById("Country").value;
+
+	if(BusinessType==""||Bmobile==""||BPAN==""||B_est==""||HNO==""||area==""||pincode==""||street==""||state==""||city==""||country=="")
+	{
+		alert("Please enter all the fields");
+		document.getElementById("BusinessType").focus();
+		return false
+	}
+	else if(!mnochk.test(Bmobile))
+	{
+		alert("invalid mobile number!");
+		document.getElementById("Bmobile").focus();
+		return false
+	}
+	else if(!panchk.test(BPAN))
+	{
+		alert("invalid pan number!");
+		document.getElementById("BPAN").focus();
+		return false
+	}
+	else if(!hnochk.test(HNO))
+	{
+		alert("invalid house number!");
+		document.getElementById("HNO").focus();
+		return false
+	}
+	else if(!areachk.test(area))
+	{
+		alert("area is not valid!");
+		document.getElementById("area").focus();
+		return false
+	}
+	else if(!streetchk.test(street))
+	{
+		alert("street given is not valid!");
+		documents.getElementById("street").focus();
+		return false
+	}
+	else
+	{
+       document.forms["Business"].submit();
+	   return true
+	}
+}
 </script>
 		</head>
 		<body>
@@ -245,7 +307,7 @@ State.options.add(opt);
 			<span class="title">Documents</span> <!--step title-->
 			</div>
 			</div>
-			<form action="" method="POST">
+			<form action="" method="POST" onsubmit="return validate();">
 				{% csrf_token %}
 				<h1>Business Details</h1>
 				

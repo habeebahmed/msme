@@ -60,7 +60,7 @@ select {
 }
 
 button {
-  padding: 19px 39px 18px 39px;
+  padding: 20px 39px 18px 39px;
   color: #FFF;
   background-color: #4bc970;
   font-size: 18px;
@@ -114,6 +114,9 @@ label.light {
   text-align: center;
   text-shadow: 0 1px 0 rgba(255,255,255,0.2);
   border-radius: 100%;
+}
+a {
+  text-decoration: none;
 }
 
 @media screen and (min-width: 480px) {

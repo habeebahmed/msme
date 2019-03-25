@@ -8,6 +8,38 @@
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+	 <script>
+        function validate(){
+		var purpose = document.getElementById("Purpose").value;
+        var tenure = document.getElementById("Tenure").value;
+        var tenurechk = /^[0-9]{1,2}$/;
+        var frequency = document.getElementById("Frequency").value;
+        var frequencychk = /^[0-9]{1,2}$/;
+        if(purpose==""||tenure==""||frequency=="")
+        {
+          alert("please fill all the fields");
+          document.getElementById("Purpose").focus();
+		  return false
+        }
+        else if(!tenurechk.test(tenure))
+        {
+          alert("Tenure should be between 6 to 12 months");
+          document.getElementById("Tenure").focus();
+		  return false
+        }
+        else if(!frequencychk.test(frequency))
+        {
+          alert("frequency should be in digits");
+          document.getElementById("Frequqncy").focus();
+		  return false
+        }
+        else
+        {
+		  return true
+          document.forms["Loan"].submit();
+        }
+      }
+       </script>
 </head>
 
 <body>
@@ -48,7 +80,7 @@
 			<!--step title-->
 		</div>
 	</div>
-	<form action="" method="POST">
+	<form action="" name="Loan" onsubmit="return validate();" method="POST">
 		{% csrf_token %}
 		<h1>Loan Details</h1>
 
@@ -92,7 +124,7 @@
 			<label for="Frequency">Frequency:</label>
 			<input type="text" id="Frequency" name="Frequency">
 			<br>
-			<button type="submit" onsubmit="POST">Next</button>
+			<button type="submit" onsubmit="Post">Next</button>
 			<!-- <script>
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");

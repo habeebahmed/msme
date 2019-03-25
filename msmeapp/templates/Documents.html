@@ -42,19 +42,19 @@
 						{% csrf_token %}
 					<br>
 					<label for="KTP">Upload KTP:</label>    			
-          			<input type="file" name="KTP">
+          			<input type="file" name="KTP" required>
           			<br>
           			<br>
           			<label for="Family Card">Upload Family Card:</label>
-          			<input type="file" name="Family_Card">
+          			<input type="file" name="Family_Card" required>
           			<br>
           			<br>
           			<label for="NPWP">Upload NPWP:</label>
-          			<input type="file" name="NPWP">
+          			<input type="file" name="NPWP" required>
           			<br>
           			<br>
           			<label for="BankStatement">Upload Bank Statement:</label>
-          			<input type="file" name="Bank_Statment">
+          			<input type="file" name="Bank_Statment" required>
           			<br>
           			<br>
     				<button type="submit">Upload</button>

@@ -125,6 +125,11 @@ label.light {
 .progress .circle.active .label{color:#FFF;background:#0c95be}
 .progress .circle.active .title{color:#0c95be}
 
+
+button a {
+  text-decoration: none;
+  color: black; 
+}
 @media screen and (min-width: 480px) {
 
   form {
