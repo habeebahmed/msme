@@ -1,0 +1,107 @@
+{% load staticfiles %}
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+   <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <title>Loan Application Success</title>
+   <style>
+   body{
+    font-family: 'Karla', sans-serif;
+  	color: #384047;
+    /*
+    width: 50%;
+    max-width: 250px;
+    margin: 0 auto;*/
+	}
+
+   .some{
+   		position: fixed;
+   		top: 50%;
+    	left: 50%;
+    	width:8em;
+    	height:8em;
+    	margin-top: -4em; /*set to a negative number 1/2 of your height*/
+    	margin-left: -4em; /*set to a negative number 1/2 of your width*/
+    		
+	}
+
+	h1{
+  		font-family: 'Karla', sans-serif;
+ 	 	  margin: 0 0 30px 0;
+  		text-align: center;
+  		padding-top: 200px;
+	}
+
+	h2{
+  		font-family: 'Karla', sans-serif;
+ 	 	  margin: 0 0 30px 0;
+ 	 	  padding-top: 250px;
+  		text-align: center;
+	}
+
+	button {
+  		padding: 19px 39px 18px 39px;
+  		position: absolute;
+  		left:37%;
+  		color: #FFF;
+  		background-color: #00CED1;
+  		font-size: 18px;
+  		text-align: center;
+  		font-style: normal;
+  		font-family: 'Karla', sans-serif;
+  		border-radius: 5px;
+  		width: 25%;
+  		border: 1px solid #00CED1;
+  		border-width: 1px 1px 3px;
+  		box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+		  margin-bottom: 10px;
+	}
+
+   .circ{
+    opacity: 0;
+    stroke-dasharray: 130;
+    stroke-dashoffset: 130;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+	}
+   .tick{
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    -webkit-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -moz-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -ms-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -o-transition: stroke-dashoffset 1s 0.5s ease-out;
+    transition: stroke-dashoffset 1s 0.5s ease-out;
+	}
+   .drawn + svg .path{
+    opacity: 1;
+    stroke-dashoffset: 0;
+	}
+   </style>  
+  </head>
+<body>
+	<h1> Your loan application has been successfully submitted. </h1>
+	<div class="some" align="center">
+		<div class="trigger"></div>
+		<svg version="1.1" id="tick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="10px" y="10px" viewBox="0 0 37 37" style="enable-background:new 0 0 37 37;" xml:space="preserve">
+	
+		<path class="circ path" style="fill:none;stroke:#77E355;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" d="M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"/>
+	
+		<polyline class="tick path" style="fill:none;stroke:#77E355;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" points="11.6,20 15.9,24.2 26.4,13.8 "/>
+		</svg>
+	</div>
+	
+	<script>
+		$(document).ready(function() {
+			$(".trigger").addClass("drawn"); 
+    	});
+	</script>
+	<h2> A mail has been sent to you.Please give us 3 working days to process your application. </h2>
+	<button><a href="https://uangteman.com/">Go to Home Page</a></button>
+</body>

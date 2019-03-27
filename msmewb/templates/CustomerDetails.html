@@ -1,163 +1,227 @@
 {% load staticfiles %}
 {% block content %}
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Applicant Info</title>
-        <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
-        <link rel="stylesheet" href="{% static 'CSS/blog.css' %}">           
-    </head>
-    <body>    
-		   <div>
-            <h1>Loan Details</h1>
-            <button type="button"><a href="{% url 'Logout' %}">Logout</a></button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Application ID</th>
-                        <th>Amount</th>
-                        <th>Tenure</th>
-                        <th>Date of Application</th>
-                        <th>Purpose</th>
-                        <th>Frequency</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{Application_Details.Application_ID}}</td>
-                        <td>{{Application_Details.Amount}}</td>
-                        <td>{{Application_Details.Tenure}}</td>
-                        <td>{{Application_Details.Date_Application}}</td>
-                        <td>{{Application_Details.Purpose}}</td>
-                        <td>{{Application_Details.Frequency}}</td>
-                        <td>{{Application_Details.Status}}</td>
-                    </tr>
-                </tbody>
-            </table>      
-           </div>
-           <br>
-           <br>
-           <div>
-               <h1>Applicant Details</h1>
-               <table>
-                <thead>
-                    <tr>
-                        <th>ID </th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Gender</th>
-                        <th>Mobile No</th>
-                        <th>Email</th>
-                        <th>PAN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{Applicant_Details.Applicant_ID}}</td>
-                        <td>{{Applicant_Details.Applicant_Name}}</td>
-                        <td>{{Applicant_Details.Applicant_Age}}</td>
-                        <td>{{Applicant_Details.Applicant_Gender}}</td>
-                        <td>{{Applicant_Details.Applicant_Mobile_No}}</td>
-                        <td>{{Applicant_Details.Applicant_Email}}</td>
-                        <td>{{Applicant_Details.Applicant_PAN}}</td>
-                    </tr>
-                </tbody>
-            </table>
-           </div>
-               <h3>Address</h3>
-               <table>
-                <thead>
-                    <tr>
-                        <th>House NO </th>
-                        <th>Street</th>
-                        <th>Locality</th>
-                        <th>City</th>
-                        <th>PinCode</th>
-                        <th>State</th>
-                        <th>Country</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{Applicant_Addr.A_House_No}}</td>
-                        <td>{{Applicant_Addr.A_Street}}</td>
-                        <td>{{Applicant_Addr.A_Locality}}</td>
-                        <td>{{Applicant_Addr.A_City}}</td>
-                        <td>{{Applicant_Addr.A_PINCode}}</td>
-                        <td>{{Applicant_Addr.A_State}}</td>
-                        <td>{{Applicant_Addr.A_Country}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <br>
-            <div>
-               <h1>Business Details</h1>
-               <table>
-                <thead>
-                    <tr>
-                        <th>ID </th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>PAN</th>
-                        <th>Contact</th>
-                        <th>Established Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{Business_Details.B_ID}}</td>
-                        <td>{{Business_Details.B_Type}}</td>
-                        <td>{{Business_Details.B_name}}</td>
-                        <td>{{Business_Details.B_PAN}}</td>
-                        <td>{{Business_Details.B_contact}}</td>
-                        <td>{{Business_Details.B_Estb}}</td>
-                    </tr>
-                </tbody>
-            </table>
-           </div>
-               <h3>Address</h3>
-               <table>
-                <thead>
-                    <tr>
-                        <th>House NO </th>
-                        <th>Street</th>
-                        <th>Locality</th>
-                        <th>City</th>
-                        <th>PinCode</th>
-                        <th>State</th>
-                        <th>Country</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{Business_Addr.B_House_No}}</td>
-                        <td>{{Business_Addr.B_Street}}</td>
-                        <td>{{Business_Addr.B_Locality}}</td>
-                        <td>{{Business_Addr.B_City}}</td>
-                        <td>{{Business_Addr.B_PINCode}}</td>
-                        <td>{{Business_Addr.B_State}}</td>
-                        <td>{{Business_Addr.B_Country}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <br>
-            
-           <form action="" method="POST">
-            {% csrf_token %}
-           <button type="submit" name="Back" >Back</button>
-           <br>
-           <br>
-           <button type="submit" name="VerifyApplication">Verify Application</button>
-           <br>
-           <br>
-          <button type="submit" name="Reject">Reject Application</button>
-            <br>
-            <br>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>Applicant Info</title>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <style type="text/css">
+      nav{
+       background: white;
+      }
+       label{
+       color: #005eb8;
+     }
+     .img-logo{
+         width: 188px;
+         margin-top: 10px;
+         margin-bottom: 10px;
+     }
+     .title-form {
+     width: 75%;
+     position: relative;
+     left:10%;
+
+     font-size: 24px!important;
+     display: inline-block;
+     color: #005eb8;
+     font-weight: normal;
+     font-family: 'MaaxRounded-medium';
+     text-align: center;
+     margin-bottom: 40px;
+     }
+   </style>
+   <nav class="navbar bg-faded">
+ <div class="container">
+
+   <ul class="nav navbar-nav navbar-logo mx-auto">
+     <li class="nav-item">
+       <a href="https://uangteman.com"><img class="img-logo" src="https://uangteman.com/assets/frontend/statics/v4/images/rebranding/logo_rebranding.png" alt="Money friend"></a>
+     </li>
+   </ul>
+   <form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit" name="Logout" class="btn btn-danger" style="width: 100px; height: 40px; border-radius:15px; margin-left: 100px;">Logout</button>
+  </form>
+ </div>
+</nav>
+ </head>
+  <body style="background: #f5f5f5;">
+   <div class="container">
+    <br><br>
+    <h1>Loan Details</h1><br>
+     <div class="row col text-center">
+       <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
+        <thead>
+         <tr>
+           <th scope="col">Application ID</th>
+           <th scope="col">Amount</th>
+           <th scope="col">Tenure</th>
+           <th scope="col">Date of Application</th>
+           <th scope="col">Purpose</th>
+           <th scope="col">Frequency</th>
+           <th scope="col">Status</th>
+        </tr>
+        </thead>
+       <tbody>
+         <tr>
+            <td>{{Application_Details.Application_ID}}</td>
+            <td>{{Application_Details.Amount}}</td>
+            <td>{{Application_Details.Tenure}}</td>
+            <td>{{Application_Details.Date_Application}}</td>
+            <td>{{Application_Details.Purpose}}</td>
+            <td>{{Application_Details.Frequency}}</td>
+            <td>{{Application_Details.Status}}</td>
+         </tr>
+        </tbody>
+      </table>
+     </div>
+   </div>
+   <br><br>
+   <div class="container">
+    <h1>Applicant Details</h1><br>
+     <div class="row col text-center">
+       <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
+        <thead>
+         <tr>
+           <th scope="col">ID </th>
+           <th scope="col">Name</th>
+           <th scope="col">Age</th>
+           <th scope="col">Gender</th>
+           <th scope="col">Mobile No</th>
+           <th scope="col">Email</th>
+           <th scope="col">PAN</th>
+        </tr>
+        </thead>
+       <tbody>
+         <tr>
+            <td>{{Applicant_Details.Applicant_ID}}</td>
+            <td>{{Applicant_Details.Applicant_Name}}</td>
+            <td>{{Applicant_Details.Applicant_Age}}</td>
+            <td>{{Applicant_Details.Applicant_Gender}}</td>
+            <td>{{Applicant_Details.Applicant_Mobile_No}}</td>
+            <td>{{Applicant_Details.Applicant_Email}}</td>
+            <td>{{Applicant_Details.Applicant_PAN}}</td>
+         </tr>
+        </tbody>
+      </table>
+     </div>
+     <h3>Personal Address</h3><br>
+     <div class="row col text-center">
+       <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
+        <thead>
+         <tr>
+            <th scope="col">House NO </th>
+            <th scope="col">Street</th>
+            <th scope="col">Locality</th>
+            <th scope="col">City</th>
+            <th scope="col">PinCode</th>
+            <th scope="col">State</th>
+            <th scope="col">Country</th>
+        </tr>
+        </thead>
+       <tbody>
+         <tr>
+            <td>{{Applicant_Addr.A_House_No}}</td>
+            <td>{{Applicant_Addr.A_Street}}</td>
+            <td>{{Applicant_Addr.A_Locality}}</td>
+            <td>{{Applicant_Addr.A_City}}</td>
+            <td>{{Applicant_Addr.A_PINCode}}</td>
+            <td>{{Applicant_Addr.A_State}}</td>
+            <td>{{Applicant_Addr.A_Country}}</td>
+         </tr>
+        </tbody>
+      </table>
+     </div>
+   </div>
+        <br><br>
+   <div class="container">
+    <h1>Business Details</h1><br>
+     <div class="row col text-center">
+       <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
+        <thead>
+         <tr>
+            <th scope="col">ID </th>
+            <th scope="col">Type</th>
+            <th scope="col">Name</th>
+            <th scope="col">PAN</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Established Date</th>
+        </tr>
+        </thead>
+       <tbody>
+         <tr>
+            <td>{{Business_Details.B_ID}}</td>
+            <td>{{Business_Details.B_Type}}</td>
+            <td>{{Business_Details.B_name}}</td>
+            <td>{{Business_Details.B_PAN}}</td>
+            <td>{{Business_Details.B_contact}}</td>
+            <td>{{Business_Details.B_Estb}}</td>
+         </tr>
+        </tbody>
+      </table>
+     </div>
+     <h3>Business Address</h3><br>
+     <div class="row col text-center">
+       <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
+        <thead>
+         <tr>
+            <th scope="col">House NO </th>
+            <th scope="col">Street</th>
+            <th scope="col">Locality</th>
+            <th scope="col">City</th>
+            <th scope="col">PinCode</th>
+            <th scope="col">State</th>
+            <th scope="col">Country</th>
+        </tr>
+        </thead>
+       <tbody>
+         <tr>
+            <td>{{Business_Addr.B_House_No}}</td>
+            <td>{{Business_Addr.B_Street}}</td>
+            <td>{{Business_Addr.B_Locality}}</td>
+            <td>{{Business_Addr.B_City}}</td>
+            <td>{{Business_Addr.B_PINCode}}</td>
+            <td>{{Business_Addr.B_State}}</td>
+            <td>{{Business_Addr.B_Country}}</td>
+         </tr>
+        </tbody>
+      </table>
+     </div>
+   </div>
+ <br>
+ <br>
+
+   <div class="container" style="position: center;">
+     <div class="row col text-center">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div style="align-self: center; position: center; left: 50%; margin-top:30%;">
+            <button type="submit" name="VerifyApplication" class="btn btn-success" style="width: 150px; height: 40px; border-radius:15px;">Verify Application</button>
+            &nbsp;&nbsp;
+            <button type="submit" name="Reject" class="btn btn-danger" style="width: 150px; height: 40px; border-radius:15px;">Reject Application</button>
+            <br><br>
+        </div>
+        <button type="submit" name="Back" class="btn btn-primary" style="width: 150px; height: 40px; border-radius:15px;">Back</button>
+            <br><br>
        </form>
-    </body>
- </html>
- {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
+ 
+
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+ </body>
+ <br>
+ <br>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 import random
 import requests
+import json
 from datetime import datetime
 # Create your views here.
 from django.conf import settings
@@ -14,12 +15,14 @@ from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from .decorator import *
 template_html = '../templates/email.html'
-def Loan(request):#Application_Details
+
+#Application_Details
+def Loan(request):
 	if request.method=="POST":
-		for key, value in request.POST.items():
-   			print('Key: %s' % (key) ) 
-   			# print(f'Key: {key}') in Python >= 3.7
-   			print('Value %s' % (value) )
+		# for key, value in request.POST.items():
+   		# 	print('Key: %s' % (key) ) 
+   		# 	# print(f'Key: {key}') in Python >= 3.7
+   		# 	print('Value %s' % (value) )
 		Loan_app = Application_Details()
 		app = "APP"+str(random.randint(0,100))
 		Loan_app.Application_ID = app
@@ -29,11 +32,27 @@ def Loan(request):#Application_Details
 		Loan_app.Purpose = request.POST.get("Purpose")
 		Loan_app.Frequency = request.POST.get("Frequency")
 		Loan_app.Status = "IP"
+		request.session['Loan'] = {
+			'amt': request.POST.get("Amount"),
+			'tenure': request.POST.get("Tenure"),
+			'purpose': request.POST.get("Purpose"),
+			'frequency': request.POST.get("Frequency")
+		}
+		Loan_app.Pages = 1
 		Loan_app.save()
 		request.session['app'] = app
 		request.session['page'] = [1]
 		return redirect('Business')
-	return render(request,'LoanDetails.html',{})
+	if 'Loan' in request.session:
+		Loan = request.session['Loan']
+		return render(request,'LoanDetails.html',{'Loan':Loan})
+	Loan= {
+		'amt': '30000',
+		'tenure': '12',
+		'purpose': 'A',
+		'frequency': '3'
+	}
+	return render(request,'LoanDetails.html',{'Loan':Loan})
 
 #Business_Details
 @user_progress(current_page=2)
@@ -42,13 +61,13 @@ def Business(request):
 		bd=Business_Details()
 		bid = "BUS"+str(random.randint(0,100))
 		bd.B_ID = bid
-		bd.Application_ID = Application_Details.objects.get(Application_ID=request.session['app'])
+		app_id = Application_Details.objects.get(Application_ID=request.session['app'])
+		bd.Application_ID = app_id
 		bd.B_Type = request.POST.get("BusinessType")
 		bd.B_name = request.POST.get("BusinessName")
 		bd.B_PAN = request.POST.get("BPAN")
 		bd.B_contact = request.POST.get("Bmobile")
 		bd.B_Estb = request.POST.get("B_est")
-		bd.save()
 		request.session['bid'] = bid
 		bad=Business_Addr()
 		bad.B_ID = bd
@@ -59,9 +78,30 @@ def Business(request):
 		bad.B_PINCode = request.POST.get("pincode")
 		bad.B_State = request.POST.get("state")
 		bad.B_Country = request.POST.get("Country")
+		request.session['business'] = {
+			'B_Type':request.POST.get("BusinessType"),
+			'B_name':request.POST.get("BusinessName"),
+			'B_PAN':request.POST.get("BPAN"),
+			'B_contact':request.POST.get("Bmobile"),
+			'B_Estb':request.POST.get("B_est"),
+			'B_House_No':request.POST.get("HNO"),
+			'B_Street':request.POST.get("street"),
+			'B_Locality':request.POST.get("area"),
+			'B_City':request.POST.get("City"),
+			'B_PINCode':request.POST.get("pincode"),
+			'B_State':request.POST.get("state"),
+			'B_Country':request.POST.get("Country")
+		}
+		app_id.Pages = 2
+		app_id.save()
+		bd.save()
 		bad.save()
 		request.session['page'] += [2]
 		return redirect('Contact')
+	if 'business' in request.session:
+		business = request.session['business']
+		print(business)
+		return render(request,'BusinessDetails.html',{'business':business})
 	return render(request,'BusinessDetails.html',{})
 
 #Applicant_Details
@@ -77,7 +117,9 @@ def Contact(request):
 		else:
 			app_id = "APP"+str(random.randint(100,999))
 			cd.Applicant_ID = app_id
-		cd.Application_ID = Application_Details.objects.get(Application_ID=request.session['app'])
+		
+		app_id = Application_Details.objects.get(Application_ID=request.session['app'])
+		cd.Application_ID = app_id
 		cd.B_ID = Business_Details.objects.get(B_ID=request.session['bid'])
 		n = request.POST.get("Name")
 		cd.Applicant_Name = n
@@ -98,10 +140,12 @@ def Contact(request):
 		cad.A_State = request.POST.get("state")
 		cad.A_Country = request.POST.get("country")
 		cad.save()
-		request.session['app_id']=app_id
+		request.session['app_id']=app_id.Application_ID
 		request.session['email']=a_email
 		request.session['name']=n
 		request.session['page'] += [3]
+		app_id.Pages = 3
+		app_id.save()
 		return redirect('Financial')
 	return render(request,'ContactDetails.html',{})
 
@@ -148,7 +192,8 @@ def Financial(request):
 		fin = Financials()
 		fin.Financial_ID = "fin"+str(random.randint(100,999))
 		fin.B_ID = Business_Details.objects.get(B_ID=request.session['bid'])
-		fin.Application_ID = Application_Details.objects.get(Application_ID=request.session['app'])
+		appln_id2 =  Application_Details.objects.get(Application_ID=request.session['app'])
+		fin.Application_ID = appln_id2
 		fin.Assets_ID = a
 		fin.Capital_ID = c
 		fin.Liabilities_ID = l
@@ -183,6 +228,8 @@ def Financial(request):
 			a.save()
 			return HttpResponse("Your Application has been Blacklisted")
 		else:
+			app_id2.Pages = 4
+			app_id2.save()
 			request.session['page'] += [4]
 			return redirect('Documents')
 		
@@ -201,6 +248,7 @@ def Documents(request):
 		fs.save(NPWP.name,NPWP)
 		bs = request.FILES['Bank_Statment']
 		fs.save(bs.name,bs)
+		appln_id =  Application_Details.objects.get(Application_ID=request.session['app'])
 		a_email1 = request.session['email']
 		n = request.session['name']
 		app = request.session['app']
@@ -210,7 +258,9 @@ def Documents(request):
 		request.session['page'] += [5]
 		print(request.session['page'])
 		del request.session['page']
-		return HttpResponse("done")
+		app_id.Pages = 5
+		app_id.save()
+		return render(request,'Appln_submission_success.html',{})
 	return render(request,'Documents.html',{})
 
 def LoginUser(request):

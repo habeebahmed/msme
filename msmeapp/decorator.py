@@ -22,16 +22,31 @@ def user_progress(current_page):
             print(current_page)
             if 'page' in request.session:
                 page = request.session['page']
-                print(request.session['page'])
                 page += [current_page]
                 print(page)
                 last_page = page[len(page)-1]
-                
+                page.sort()
+                page = list(dict.fromkeys(page))
+                print("Page",page)
                 try:
                     for i in range(1,last_page+1):
                         if i != page[i-1]:
                             print(i)
                             print(page[i-1])
+                            temp = page[:]
+                            temp.pop()
+                            temp.append(temp[-1]+1)
+                            print("Temp",temp)
+                            page.pop()
+                            print("Page2",page)
+                            if temp[-1] == 2:
+                                return redirect('Business')
+                            elif temp[-1] == 3:
+                                return redirect('Contact')
+                            elif temp[-1] == 4:
+                                return redirect('Financial')
+                            elif temp[-1] == 5:
+                                return redirect('Documents')
                             return redirect('Loan')
                     page.pop()
                     return function(request, *args, **kwargs)

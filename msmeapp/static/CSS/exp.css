@@ -7,7 +7,7 @@
 body {
   font-family: 'Karla', sans-serif;
   color: #384047;
-  background-color: rgb(223, 223, 223);
+  background-color: #f5f5f5;
 }
 
 
@@ -16,7 +16,7 @@ form {
   max-width: 300px;
   margin: 10px auto;
   padding: 10px 20px;
-  background: #f4f7f8;
+  background: white;
   border-radius: 8px;
 }
 
@@ -36,26 +36,30 @@ input[type="search"],
 input[type="tel"],
 input[type="time"],
 input[type="url"],
-input[type="submit"]
+input[type="submit"],
 textarea,
 select {
-  background: rgba(255,255,255,0.1);
+  background: #f5f5f5;
   border: none;
-  font-size: 16px;
   height: auto;
   margin: 0;
   outline: 0;
-  padding: 15px;
   width: 100%;
-  background-color: #e8eeef;
-  color: #8a97a0;
+  background-color: white;
+  border: 1px solid #ced4da;
+  /* color: #8a97a0; */
   box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  height: calc(2.875rem + 2px);
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-  margin: 0 4px 8px 0;
+  margin: 0px 6px;
 }
 
 select {
@@ -67,14 +71,14 @@ select {
 button {
   padding: 19px 39px 18px 39px;
   color: #FFF;
-  background-color: #00CED1;
+  background-color: #005eb8;
   font-size: 18px;
   text-align: center;
   font-style: normal;
   font-family: 'Karla', sans-serif;
   border-radius: 5px;
   width: 100%;
-  border: 1px solid #00CED1;
+  border: 1px solid #005eb8;
   border-width: 1px 1px 3px;
   box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
   margin-bottom: 10px;
@@ -93,12 +97,16 @@ legend {
 label {
   display: block;
   margin-bottom: 8px;
+  color: #005eb8;
+  font-weight:  bolder;
+  font-size: 1rem;
 }
 
 label.light {
   font-weight: 300;
   display: inline;
 }
+
 
 .number {
   background-color: #5fcf80;
@@ -120,7 +128,7 @@ label.light {
 .progress .circle .label{display:inline-block;width:32px;height:32px;line-height:32px;border-radius:32px;margin-top:4px;color:#b5b5ba;font-size:17px}
 .progress .circle .title{display:block;color:#b5b5ba;font-size:13px;line-height:30px;width:200px;margin-left:-80px;text-align:center}
 .progress .done .bar,.progress .circle.done{background:#eee}
-.progress .circle.done .label{color:#FFF;background:#8bc435}
+.progress .circle.done .label{color:#FFF;background:#008000}
 .progress .circle.done .title{color:#444}
 .progress .circle.active .label{color:#FFF;background:#0c95be}
 .progress .circle.active .title{color:#0c95be}
@@ -130,10 +138,75 @@ button a {
   text-decoration: none;
   color: black; 
 }
+
+.js .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  max-width: 80%;
+  font-size: 1.25rem;
+  /* 20px */
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.525rem 1rem;
+  /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+  display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+  /* pointer-events: none; */
+  /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  /* 4px */
+  margin-right: 0.25em;
+  /* 4px */
+}
+
+
+/* style 1 */
+
+.inputfile-1 + label {
+  color: #f1e5e6;
+  background-color: #d3394c;
+  margin: 0px 5px -8px 30px;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+  background-color: #722040;
+}
+
 @media screen and (min-width: 480px) {
 
   form {
-    max-width: 480px;
+    max-width: 600px;
   }
 
 }

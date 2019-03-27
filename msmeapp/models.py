@@ -19,6 +19,7 @@ class Application_Details(models.Model):#Loan
     Purpose = models.TextField(max_length=1)
     Frequency=models.IntegerField(default=0)
     Status=models.CharField(max_length=3)
+    Pages=models.IntegerField(default=0)
     
 #Business_Details ( B_ID (PK), Applicant_ID(FK), B_Type, B_name,B_PAN, B_contact, B_Addr, B_Estb,  )
 class Business_Details(models.Model):

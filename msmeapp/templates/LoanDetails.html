@@ -8,42 +8,62 @@
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
-	 <script>
-        function validate(){
-		var purpose = document.getElementById("Purpose").value;
-        var tenure = document.getElementById("Tenure").value;
-        var tenurechk = /^[0-9]{1,2}$/;
-        var frequency = document.getElementById("Frequency").value;
-        var frequencychk = /^[0-9]{1,2}$/;
-        if(purpose==""||tenure==""||frequency=="")
-        {
-          alert("please fill all the fields");
-          document.getElementById("Purpose").focus();
-		  return false
-        }
-        else if(!tenurechk.test(tenure))
-        {
-          alert("Tenure should be between 6 to 12 months");
-          document.getElementById("Tenure").focus();
-		  return false
-        }
-        else if(!frequencychk.test(frequency))
-        {
-          alert("frequency should be in digits");
-          document.getElementById("Frequqncy").focus();
-		  return false
-        }
-        else
-        {
-		  return true
-          document.forms["Loan"].submit();
-        }
-      }
-       </script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+	<script>
+		function validate() {
+			var purpose = document.getElementById("Purpose").value;
+			var tenure = document.getElementById("Tenure").value;
+			var tenurechk = /^[0-9]{1,2}$/;
+			var frequency = document.getElementById("Frequency").value;
+			var frequencychk = /^[0-9]{1,2}$/;
+			if (purpose == "" || tenure == "" || frequency == "") {
+				alert("please fill all the fields");
+				document.getElementById("Purpose").focus();
+				return false
+			}
+			else if (!tenurechk.test(tenure)) {
+				alert("Tenure should be between 6 to 12 months");
+				document.getElementById("Tenure").focus();
+				return false
+			}
+			else if (!frequencychk.test(frequency)) {
+				alert("frequency should be in digits");
+				document.getElementById("Frequqncy").focus();
+				return false
+			}
+			else {
+				return true
+				document.forms["Loan"].submit();
+			}
+		}
+
+		function slide() {
+			s = document.getElementById("myRange")
+			v = {{Loan.amt}} || s.value
+		vv = v ? v : s.value
+		var val = (vv - 10000) / (150000 - 10000);
+		s.style.backgroundImage = '-webkit-gradient(linear, left top, right top, '
+			+ 'color-stop(' + val + ', #ffc600), '
+			+ 'color-stop(' + val + ', #C5C5C5)'
+			+ ')';
+				
+			};
+
+	</script>
 </head>
 
-<body>
-	<div class="progress">
+<body onload="slide()" style="background-color:#f5f5f5;">
+	<div class="progress" style="margin-top:100px;height:5rem;display:block;overflow:visible;background-color:#f5f5f5;">
 		<div class="circle active">
 			<!--add the 'done' class for completed steps-->
 			<span class="label">1</span>
@@ -92,8 +112,8 @@
 			<!-- Slider bar -->
 			<label for="Amount">Loan Amount:</label>
 			<div class="slidecontainer">
-				<input type="range" min="10000" max="150000" name="Amount" value="30000" class="slider" id="myRange"
-					step="1000">
+				<input type="range" min="10000" max="150000" name="Amount" value="{{Loan.amt}}" ||'30000' class="slider"
+					id="myRange" step="1000" required>
 				<p>Rs: <span id="demo"></span></p>
 			</div>
 			<!--Java script code for slider-->
@@ -113,16 +133,38 @@
 					<input type="text" id="Amount" name="Amount">-->
 			<br>
 			<label for="Purpose">Purpose:</label>
-			<select name="Purpose" id="Purpose">
+			<select name="Purpose" id="Purpose" class="form-control form-control-lg" required>
 				<option value="A">Expansion</option>
 				<option value="B">Capital</option>
 				<option value="C">Wages</option>
 			</select>
+			<br>
+			<script>
+				//Get select object
+				var purpose = '{{Loan.purpose}}'
+				if (purpose) {
+					var objSelect = document.getElementById("Purpose");
+
+					//Set selected
+					setSelectedValue(objSelect, purpose);
+
+					function setSelectedValue(selectObj, valueToSet) {
+						for (var i = 0; i < selectObj.options.length; i++) {
+							if (selectObj.options[i].value == valueToSet) {
+								selectObj.options[i].selected = true;
+								return;
+							}
+						}
+					}
+				}
+			</script>
 			<label for="Tenure">Tenure(6-12m):</label>
-			<input type="text" id="Tenure" name="Tenure">
+			<input type="text" id="Tenure" name="Tenure" value="{{Loan.tenure}}" ||'12' class="form-control form-control-lg"
+				required>
 			<br>
 			<label for="Frequency">Frequency:</label>
-			<input type="text" id="Frequency" name="Frequency">
+			<input type="text" id="Frequency" name="Frequency" value="{{Loan.frequency}}" ||'12'
+				class="form-control form-control-lg" required>
 			<br>
 			<button type="submit" onsubmit="Post">Next</button>
 			<!-- <script>
@@ -159,13 +201,13 @@ slider.oninput = function() {
 					background-image: -webkit-gradient(linear,
 						left top,
 						right top,
-						color-stop(0.15, #00CED1),
+						color-stop(0.15, #ffc600),
 						color-stop(0.15, #C5C5C5));
 				}
 
 				input[type='range']::-webkit-slider-thumb {
 					-webkit-appearance: none !important;
-					background-color: #FF2800;
+					background-color: #005eb8;
 					border: 1px solid #CECECE;
 					height: 20px;
 					width: 20px;
@@ -209,15 +251,18 @@ slider.oninput = function() {
 		</fieldset>
 	</form>
 	<script>
-			$('input[type="range"]').on('input',function () {
-				var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
-	
-				$(this).css('background-image',
-					'-webkit-gradient(linear, left top, right top, '
-					+ 'color-stop(' + val + ', #00CED1), '
-					+ 'color-stop(' + val + ', #C5C5C5)'
-					+ ')'
-				);
-			});
-		</script>
+		$('input[type="range"]').on('input', function () {
+			var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+
+			$(this).css('background-image',
+				'-webkit-gradient(linear, left top, right top, '
+				+ 'color-stop(' + val + ', #ffc600), '
+				+ 'color-stop(' + val + ', #C5C5C5)'
+				+ ')'
+			);
+		});
+
+
+	</script>
+
 </body>

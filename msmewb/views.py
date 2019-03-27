@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
 import django.core.exceptions
-# Create your views here.
 from msmeapp.models import *	
 from django.http import HttpResponse
 import datetime
@@ -12,16 +11,9 @@ from django.contrib.auth import logout
 import requests,json
 from .decorators import *
 
-@cs_not_loggedin
-def CustomerDashBoardWB(request):
-	if request.method == "POST" and "Edit" in request.POST:
-		return redirect('transfer')
-	elif request.method == "POST" and "View" in request.POST:
-		return redirect('CustomerDisplayApplications')
-	return render(request,'CustomerDashboardWB.html',{})
+server_url = "http://10.15.15.66:8080/test"
+#server_url = "http://localhost:8080/test"
 
-
-@user_not_loggedin
 def Logout(request):
 	logout(request)
 	# del request.session['username']
@@ -57,17 +49,117 @@ def LoginWB(request):
 	else:
 		return render(request,'LoginWB.html',{})
 
-@staff_not_loggedin
-def Staff(request):
+
+@cs_not_loggedin
+def CustomerDashBoardWB(request):
+	request.session['path'] = 'CustomerDashBoardWB'
 	if request.method == "POST" and "Edit" in request.POST:
 		return redirect('transfer')
 	elif request.method == "POST" and "View" in request.POST:
-		return redirect('CSverifiedApplications')    
+		return redirect('CustomerDisplayApplications')
+	elif request.method == "POST" and "Logout" in request.POST:
+		return redirect('Logout')
+	return render(request,'CustomerDashboardWB.html',{})
+
+@cs_not_loggedin
+def CustomerDisplayApplications(request):
+	request.session['path'] = 'CustomerDisplayApplications'
+	request.session.set_expiry(request.session.get_expiry_age())
+	#api call
+	#a = Application_Details.objects.exclude(Status='BL')
+	data = {
+		"table" : "application_details",
+ 		"status" : "BL"
+	}
+	res = requests.post(url = server_url, data = data)
+	r = Parse(res.text)
+	print(r.data)
+	a = r.data
+	if request.method == "POST" and "Logout" in request.POST:
+		 return redirect('Logout')
+	return render(request,'CustomerDisplayApplications.html',{'applications': a})
+
+@cs_not_loggedin
+def CustomerDetails(request):
+	request.session['path'] = 'CustomerDetails'
+	request.session.set_expiry(request.session.get_expiry_age())
+	if request.method == "POST" and "Logout" in request.POST:
+		 return redirect('Logout')
+	if request.method=="POST" and "Back" in request.POST:
+		return redirect('CustomerDisplayApplications')
+	appln_id = request.GET.get('appln_id')
+	app_details = Application_Details.objects.get(Application_ID=appln_id)
+	a_detail = Applicant_Details.objects.get(Application_ID=appln_id)
+	b_detail = Business_Details.objects.get(Application_ID=appln_id)
+	a_addr = Applicant_Addr.objects.get(id=a_detail.id)
+	b_addr = Business_Addr.objects.get(B_ID=b_detail.B_ID)
+	if request.method=="POST" and "Reject" in request.POST:
+		appln_id = request.GET.get('appln_id')
+		app_details = Application_Details.objects.get(Application_ID=appln_id)
+		app_details.Status = "R"
+		app_details.save()
+		ar = App_Rejected()
+		ar.Application_ID = app_details
+		ar.B_ID = b_detail
+		ar.Reason_code = Reject_reason.objects.get(Reason_code='D')
+		ar.save()
+		mail_subject = 'Application Rejected'
+		message = 'Hello, '+a_detail.Applicant_Name+'. We are sorry to inform you that your loan application has been Rejected. Thank you.'
+		a_email1 = a_detail.Applicant_Email
+		send_mail(mail_subject,message,'',[a_email1],fail_silently=False)
+		return redirect('Reject')
+	if request.method=="POST" and "VerifyApplication" in request.POST:
+		appln_id = request.GET.get('appln_id')
+		app_details = Application_Details.objects.get(Application_ID=appln_id)
+		if app_details.Status == "CS" or app_details.Status == "D" or app_details.Status == "D" or app_details.Status[:1] == "E":
+			return redirect('AlreadyVerified')
+		app_details.Status = "CS"
+		app_details.save()
+		return redirect('ApplicationVerified')
+	return render(request,'CustomerDetails.html',{'Application_Details':app_details,'Applicant_Details':a_detail,'Applicant_Addr':a_addr,'Business_Details':b_detail,'Business_Addr':b_addr})
+
+@cs_not_loggedin
+def AlreadyVerified(request):
+	request.session['path'] = 'AlreadyVerified'
+	request.session.set_expiry(request.session.get_expiry_age())
+	if request.method=="POST":
+		return redirect('CustomerDisplayApplications')
+	print("hello")
+	return render(request,'AlreadyVerified.html',{})
+
+@cs_not_loggedin
+def Reject(request):
+	request.session['path'] = 'Reject'
+	request.session.set_expiry(request.session.get_expiry_age())
+	if request.method=="POST" and "view_apps" in request.POST:
+		return redirect('CustomerDisplayApplications')
+	return render(request,'Reject.html')
+
+@cs_not_loggedin
+def ApplicationVerified(request):
+	request.session['path'] = 'ApplicationVerified'
+	request.session.set_expiry(request.session.get_expiry_age())
+	if request.method=="POST" and "view_apps" in request.POST:
+		return redirect('CustomerDisplayApplications')
+	return render(request,'ApplicationVerified.html')
+
+
+@staff_not_loggedin
+def Staff(request):
+	request.session['path'] = 'Staff'
+	if request.method == "POST" and "Edit" in request.POST:
+		return redirect('transfer')
+	elif request.method == "POST" and "View" in request.POST:
+		return redirect('CSverifiedApplications')  
+	elif request.method == "POST" and "Logout" in request.POST:
+		return redirect('Logout')
 	return render(request,'Staff.html',{})
 
 @staff_not_loggedin
 def CSverifiedApplications(request):
 	#a = Application_Details.objects.filter(Status='CS')
+	request.session['path'] = 'CSverifiedApplications'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "DocumentVerification" in request.POST:
 		appln_id = request.POST.get('DocumentVerification')
 		app_details = Application_Details.objects.get(Application_ID=appln_id)
@@ -106,7 +198,7 @@ def CSverifiedApplications(request):
 		"table" : "application_details",
  		"status" : "CS"
 	}
-	res = requests.post(url = "http://localhost:8080/test", data = data)
+	res = requests.post(url = server_url, data = data)
 	r = Parse(res.text)
 	print(r.data)
 	a = r.data		
@@ -114,33 +206,42 @@ def CSverifiedApplications(request):
 
 @staff_not_loggedin
 def DocumentsRejected(request):
+	request.session['path'] = 'DocumentsRejected'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('CSverifiedApplications')
 	return render(request,'DocumentsRejected.html')
 
 @staff_not_loggedin
 def DocumentsVerified(request):
+	request.session['path'] = 'DocumentsVerified'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('CSverifiedApplications')
 	return render(request,'DocumentsVerified.html')
 
 @manager_not_logedin
 def Manager(request):
+	request.session['path'] = 'Manager'
 	if request.method == "POST" and "Edit" in request.POST:
 		return redirect('transfer')
 	elif request.method == "POST" and "View" in request.POST:
-		return redirect('ManagerApplications')    
+		return redirect('ManagerApplications')
+	elif request.method == "POST" and "Logout" in request.POST:
+		 return redirect('Logout')
 	return render(request,'Manager.html',{})
 
 @manager_not_logedin
 def ManagerApplications(request):
+	request.session['path'] = 'ManagerApplications'
+	request.session.set_expiry(request.session.get_expiry_age())
 	#api call
 	#a = Application_Details.objects.filter(Status='DV')
 	data = {
 		"table" : "application_details",
  		"status" : "DV"
 	}
-	res = requests.post(url = "http://localhost:8080/test", data = data)
+	res = requests.post(url = server_url, data = data)
 	r = Parse(res.text)
 	print(r.data)
 	a = r.data
@@ -148,6 +249,8 @@ def ManagerApplications(request):
 
 @manager_not_logedin
 def ManagerApplicationDetails(request):
+	request.session['path'] = 'ManagerApplicationDetails'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "Back" in request.POST:
 		return redirect('ManagerApplications')
 	print("In manager Details")
@@ -258,80 +361,30 @@ def getDueDate(tenure):
 
 @manager_not_logedin
 def LoanApproved(request):
+	request.session['path'] = 'LoanApproved'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('ManagerApplications')
 	return render(request,'LoanApproved.html')
 
 @manager_not_logedin
 def ManagerReject(request):
+	request.session['path'] = 'ManagerReject'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('ManagerApplications')
 	return render(request,'ManagerReject.html')
 
-@cs_not_loggedin
-def CustomerDisplayApplications(request):
-	#api call
-	#a = Application_Details.objects.exclude(Status='BL')
-	data = {
-		"table" : "application_details",
- 		"status" : "BL"
-	}
-	res = requests.post(url = "http://localhost:8080/test", data = data)
-	r = Parse(res.text)
-	print(r.data)
-	a = r.data
-	return render(request,'CustomerDisplayApplications.html',{'applications': a})
 
-@cs_not_loggedin
-def CustomerDetails(request):
-	if request.method=="POST" and "Back" in request.POST:
-		return redirect('CustomerDisplayApplications')
-	appln_id = request.GET.get('appln_id')
-	app_details = Application_Details.objects.get(Application_ID=appln_id)
-	a_detail = Applicant_Details.objects.get(Application_ID=appln_id)
-	b_detail = Business_Details.objects.get(Application_ID=appln_id)
-	a_addr = Applicant_Addr.objects.get(id=a_detail.id)
-	b_addr = Business_Addr.objects.get(B_ID=b_detail.B_ID)
-	if request.method=="POST" and "Reject" in request.POST:
-		appln_id = request.GET.get('appln_id')
-		app_details = Application_Details.objects.get(Application_ID=appln_id)
-		app_details.Status = "R"
-		app_details.save()
-		ar = App_Rejected()
-		ar.Application_ID = app_details
-		ar.B_ID = b_detail
-		ar.Reason_code = Reject_reason.objects.get(Reason_code='D')
-		ar.save()
-		mail_subject = 'Application Rejected'
-		message = 'Hello, '+a_detail.Applicant_Name+'. We are sorry to inform you that your loan application has been Rejected. Thank you.'
-		a_email1 = a_detail.Applicant_Email
-		send_mail(mail_subject,message,'',[a_email1],fail_silently=False)
-		return redirect('Reject')
-	if request.method=="POST" and "VerifyApplication" in request.POST:
-		appln_id = request.GET.get('appln_id')
-		app_details = Application_Details.objects.get(Application_ID=appln_id)
-		app_details.Status = "CS"
-		app_details.save()
-		return redirect('ApplicationVerified')
-	return render(request,'CustomerDetails.html',{'Application_Details':app_details,'Applicant_Details':a_detail,'Applicant_Addr':a_addr,'Business_Details':b_detail,'Business_Addr':b_addr})
-
-@cs_not_loggedin
-def Reject(request):
-	if request.method=="POST" and "view_apps" in request.POST:
-		return redirect('CustomerDisplayApplications')
-	return render(request,'Reject.html')
-
-
+@manager_not_logedin
 def Blacklist(request):
+	request.session['path'] = 'Blacklist'
+	request.session.set_expiry(request.session.get_expiry_age())
 	if request.method=="POST" and "view_apps" in request.POST:
 		return redirect('ManagerApplications')
 	return render(request,'Blacklist.html')
 
-@cs_not_loggedin
-def ApplicationVerified(request):
-	if request.method=="POST" and "view_apps" in request.POST:
-		return redirect('CustomerDisplayApplications')
-	return render(request,'ApplicationVerified.html')
+
 #Repayment phase
 # def Payment(request):
 # 	if request.GET.get('appln_id') and request.method !="POST" :
