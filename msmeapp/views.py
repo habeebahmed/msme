@@ -113,21 +113,19 @@ def Contact(request):
 		pan2 = Applicant_Details.objects.filter(Applicant_PAN=pan1)
 		if pan2:
 			cd.Applicant_ID = pan2[0].Applicant_ID
-			app_id = pan2[0].Applicant_ID
+			app_id2 = pan2[0].Applicant_ID
 		else:
-			app_id = "APP"+str(random.randint(100,999))
+			app_id2 = "APP"+str(random.randint(100,999))
 			cd.Applicant_ID = app_id
-		
+		print(request.session['app'])
 		app_id = Application_Details.objects.get(Application_ID=request.session['app'])
 		cd.Application_ID = app_id
 		cd.B_ID = Business_Details.objects.get(B_ID=request.session['bid'])
-		n = request.POST.get("Name")
-		cd.Applicant_Name = n
+		cd.Applicant_Name = request.POST.get("Name")
 		cd.Applicant_Age = request.POST.get("Age")
 		cd.Applicant_Gender = request.POST.get("gender")
 		cd.Applicant_Mobile_No = request.POST.get("mobile")
-		a_email = request.POST.get("email")
-		cd.Applicant_Email = a_email
+		cd.Applicant_Email = request.POST.get("email")
 		cd.Applicant_PAN = pan1
 		cd.save()
 		cad=Applicant_Addr()
@@ -139,14 +137,33 @@ def Contact(request):
 		cad.A_PINCode = request.POST.get("pincode")
 		cad.A_State = request.POST.get("state")
 		cad.A_Country = request.POST.get("country")
-		cad.save()
-		request.session['app_id']=app_id.Application_ID
-		request.session['email']=a_email
-		request.session['name']=n
+		request.session['contact'] = {
+			'Applicant_Name':request.POST.get("Name"),
+			'Applicant_Age':request.POST.get("Age"),
+			'Applicant_Gender':request.POST.get("gender"),
+			'Applicant_Mobile_No':request.POST.get("mobile"),
+			'Applicant_Email':request.POST.get("email"),
+			'Applicant_PAN':request.POST.get("pan"),
+			'A_House_No':request.POST.get("HNO"),
+			'A_Street':request.POST.get("street"),
+			'A_Locality':request.POST.get("area"),
+			'A_City':request.POST.get("City"),
+			'A_PINCode':request.POST.get("pincode"),
+			'A_State':request.POST.get("state"),
+			'A_Country':request.POST.get("country")
+		}
+		request.session['app_id']=app_id2
+		request.session['email']=request.POST.get("email")
+		request.session['name']=request.POST.get("Name")
 		request.session['page'] += [3]
 		app_id.Pages = 3
+		cad.save()
 		app_id.save()
 		return redirect('Financial')
+	if 'contact' in request.session:
+		contact = request.session['contact']
+		print(contact)
+		return render(request,'ContactDetails.html',{'contact':contact})
 	return render(request,'ContactDetails.html',{})
 
 #Financials
@@ -230,11 +247,29 @@ def Financial(request):
 		else:
 			app_id2.Pages = 4
 			app_id2.save()
+			request.session['financial'] = {
+			'Fixed_Assets':request.POST.get("Fixed_Assets"),
+			'Intangible_Assets':request.POST.get("Intangible_Assets"),
+			'Current_Assets':request.POST.get("Current_Assets"),
+			'Non_Current_Assets':request.POST.get("Non_Current_Assets"),
+			'Issued_Capital':request.POST.get("Issued_Capital"),
+			'Paid_Up_Capital':request.POST.get("Paid_Up_Capital"),
+			'Term_Liabilities':request.POST.get("Term_Liabilities"),
+			'Current_Liabilities':request.POST.get("Current_Liabilities"),
+			'Operations_Activities':request.POST.get("Operations_Activities"),
+			'Investing_Activities':request.POST.get("Investing_Activities"),
+			'Financing_Activities':request.POST.get("Financing_Activities"),
+			'Subsidy_Gov':request.POST.get("Subsidy_Gov"),
+			'General_Reserves':request.POST.get("General_Reserves")
+		}
 			request.session['page'] += [4]
 			return redirect('Documents')
-		
-	else:
-		return render(request,'FinancialDetails.html',{}) 
+
+	if 'financial' in request.session:
+		financial = request.session['financial']
+		print(financial)
+		return render(request,'FinancialDetails.html',{'financial':financial})	
+	return render(request,'FinancialDetails.html',{}) 
 
 @user_progress(current_page=5)
 def Documents(request):

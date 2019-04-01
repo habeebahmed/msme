@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'msmeapp',
-    'msmewb',
-    'django_cron',
+    'msmewb'
 ]
 
 MIDDLEWARE = [

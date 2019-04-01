@@ -6,7 +6,6 @@
 	<title>Business Details</title>
 	<link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
 	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" type='text/css'>
-	<link rel="stylesheet" href="CSS/main.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -413,9 +412,10 @@
 	</fieldset>
 	<script>
 		function populate() {
-			if(!isEmpty({{busniess}})){
+			if(true){
+				var a = '{{business.B_Type}}'
 				var BusinessType = document.getElementById("BusinessType");
-				var valueToSet = {{busniess.B_Type}}
+				var valueToSet = a
 				setSelectedValue(BusinessType,valueToSet)
 				function setSelectedValue(selectObj, valueToSet) {
 						for (var i = 0; i < selectObj.options.length; i++) {
@@ -425,21 +425,27 @@
 							}
 						}
 					}
-				document.getElementById("BusinessName").value = {{business.B_name}}
-				document.getElementById("Bmobile").value = {{business.B_contact}};
-				document.getElementById("BPAN").value = {{business.B_PAN}};
-				document.getElementById("B_est").value = {{business.B_Estb}};
-				document.getElementById("HNO").value = {{business.B_House_No}};
-				document.getElementById("area").value = {{business.B_Locality}};
-				document.getElementById("pincode").value = {{business.B_PINCode}};
-				document.getElementById("street").value = {{business.B_Street}};
-				valueToSet = {{busniess.B_State}}
+				document.getElementById("BusinessName").value = '{{business.B_name}}'
+				document.getElementById("Bmobile").value = '{{business.B_contact}}';
+				document.getElementById("BPAN").value = '{{business.B_PAN}}';
+				document.getElementById("B_est").value = '{{business.B_Estb}}';
+				document.getElementById("HNO").value = '{{business.B_House_No}}';
+				document.getElementById("area").value = '{{business.B_Locality}}';
+				document.getElementById("pincode").value = '{{business.B_PINCode}}';
+				document.getElementById("street").value = '{{business.B_Street}}';
+				var b = '{{business.B_State}}'
+				valueToSet = b
 				state = document.getElementById("State");
 				setSelectedValue(state,valueToSet)
-				valueToSet = {{busniess.B_City}}
+				var c = '{{business.B_City}}'
 				var city = document.getElementById("City");
-				setSelectedValue(city,valueToSet)
-				valueToSet = {{busniess.B_Country}}
+				var opt = document.createElement('option');
+				opt.value = c;
+				opt.text = c;
+				opt.selected = true;
+				city.options.add(opt);
+				var d = '{{business.B_Country}}'
+				valueToSet = d
 				var country = document.getElementById("Country");
 				setSelectedValue(country,valueToSet)
 			}
