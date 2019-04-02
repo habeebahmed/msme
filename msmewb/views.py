@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 import django.core.exceptions
 from msmeapp.models import *	
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 import datetime
 from datetime import date
 from dateutil.relativedelta import relativedelta
@@ -73,8 +73,18 @@ def CustomerDisplayApplications(request):
 	}
 	res = requests.post(url = server_url, data = data)
 	r = Parse(res.text)
-	print(r.data)
+	#print(r.data)
 	a = r.data
+	for app in a:
+		a_detail = Applicant_Details.objects.filter(Application_ID=app['Application_ID']).values()[0]
+		b_detail = Business_Details.objects.filter(Application_ID=app['Application_ID']).values('B_ID', 'B_name', 'B_PAN', 'B_contact')[0]
+		a_addr = Applicant_Addr.objects.filter(id=a_detail['id']).values()[0]
+		b_addr = Business_Addr.objects.filter(B_ID=b_detail['B_ID']).values()[0]
+		app['applicant'] = a_detail
+		app['business'] = b_detail
+		app['a_addr'] = a_addr
+		app['b_addr'] = b_addr
+	print(a)
 	if request.method == "POST" and "Logout" in request.POST:
 		 return redirect('Logout')
 	return render(request,'CustomerDisplayApplications.html',{'applications': a})

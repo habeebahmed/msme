@@ -394,7 +394,7 @@ def DashBoard1(request):
 		return HttpResponse("Payment Link has been sent to your mail "+appln_id)
 	
 
-	return render(request,'DashBoard1.html',{"application": application})
+	return render(request,'DashBoard1.html',{"application": application,"install":install})
 
 @user_not_loggedin
 def Payment(request):
