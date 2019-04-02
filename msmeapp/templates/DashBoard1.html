@@ -1,76 +1,83 @@
 {% load staticfiles %}
 
 <head>
-	<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Loan Applications</title>
-        <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
-        <link rel="stylesheet" href="{% static 'CSS/blog.css' %}">        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Applications</title>
+  <link rel="stylesheet" href="{% static 'CSS/exp.css' %}">
+  <link rel="stylesheet" href="{% static 'CSS/blog.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <form method="POST" action="">
+  <form method="POST" action="">
     {% csrf_token %}
-     <div>
-            <h1>Loan Details</h1>
-            <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
-                <thead>
-                    <tr>
-                        <th>Application ID</th>
-                        <th>Amount</th>
-                        <th>Due Amount</th>
-                        <th>Due Date</th>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <th>EMI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                     {% for appln in application %}
-                    <tr>
-                        <td>{{appln.Application_ID.Application_ID}}</td>
-                        <td>{{appln.Amount}}</td>
-                        <td>{{appln.Due_Amount}}</td>
-                        <td>{{appln.Due_date}}</td>
-                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>{{install.Total_Amount}}</td>
-                        <td>
-                            &nbsp;&nbsp;<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Pay</button>
-                        <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Payment Confirmation</h4>
-                            </div>
-                            <div class="modal-body">
-                              <label for="reason" id="label1">Method:</label>
-                              <select id="paytype" name="paytype">
-                              <option value="A">Lumpsum</option>
-                              <option value="B">EMI</option>
-                              </select>     
-                              <br><br>
-                              <input type="hidden" name="appln_id" value={{appln.Application_ID.Application_ID}}>
-                              <button type="submit" name="Pay" id="btn2"  value={{appln.Application_ID.Application_ID}}>Pay</button>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                          </div> </td>            
-                    </tr>
-                    {% endfor %}
-                     <!-- {% for appln in notdisbursed %}
+    <div>
+      <h1>Loan Details</h1>
+      <table class="table table-hover table-striped table-bordered" style="background-color: white; margin-top:50px;">
+        <thead>
+          <tr>
+            <th>Application ID</th>
+            <th>Amount</th>
+            <th>Due Amount</th>
+            <th>Due Date</th>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <th>EMI</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appln in application %}
+          <tr>
+            <td>{{appln.Application_ID.Application_ID}}</td>
+            <td>{{appln.Amount}}</td>
+            <td>{{appln.Due_Amount}}</td>
+            <td>{{appln.Due_date}}</td>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <td>{{install.Total_Amount}}</td>
+            <td>
+              &nbsp;&nbsp;<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                data-target="#myModal">Pay</button>
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Payment Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                      <label for="reason" id="label1">Method:</label>
+                      <select id="paytype" name="paytype">
+                        <option value="A">Lumpsum</option>
+                        <option value="B">EMI</option>
+                      </select>
+                      <br><br>
+                      <input type="hidden" name="appln_id" value={{appln.Application_ID.Application_ID}}>
+                      <button type="submit" name="Pay" id="btn2"
+                        value={{appln.Application_ID.Application_ID}}>Pay</button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+          <!-- {% for appln in notdisbursed %}
                     <tr>
                         <td>{{appln.Application_ID.Application_ID}}</td>
                         <td>{{appln.Amount}}</td>
                         <td>pending</td>
-                        <td>pending</td>      -->         
-                 <!--    </tr><! -->-- 
-               -->      <!-- {% endfor %} -->
-                </tbody>
-            </table>
-            <button type="submit" name="Logout" id="btn2">Logout</button>
-        </div>
-    </form>
+                        <td>pending</td>      -->
+          <!--    </tr><! -->--
+          -->
+          <!-- {% endfor %} -->
+        </tbody>
+      </table>
+      <button type="submit" name="Logout" id="btn2">Logout</button>
+    </div>
+  </form>
 </body>

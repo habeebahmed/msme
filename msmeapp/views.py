@@ -116,7 +116,7 @@ def Contact(request):
 			app_id2 = pan2[0].Applicant_ID
 		else:
 			app_id2 = "APP"+str(random.randint(100,999))
-			cd.Applicant_ID = app_id
+			cd.Applicant_ID = app_id2
 		print(request.session['app'])
 		app_id = Application_Details.objects.get(Application_ID=request.session['app'])
 		cd.Application_ID = app_id
@@ -245,8 +245,8 @@ def Financial(request):
 			a.save()
 			return HttpResponse("Your Application has been Blacklisted")
 		else:
-			app_id2.Pages = 4
-			app_id2.save()
+			appln_id2.Pages = 4
+			appln_id2.save()
 			request.session['financial'] = {
 			'Fixed_Assets':request.POST.get("Fixed_Assets"),
 			'Intangible_Assets':request.POST.get("Intangible_Assets"),
@@ -293,8 +293,8 @@ def Documents(request):
 		request.session['page'] += [5]
 		print(request.session['page'])
 		del request.session['page']
-		app_id.Pages = 5
-		app_id.save()
+		appln_id.Pages = 5
+		appln_id.save()
 		return render(request,'Appln_submission_success.html',{})
 	return render(request,'Documents.html',{})
 

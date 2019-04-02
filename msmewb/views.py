@@ -11,8 +11,8 @@ from django.contrib.auth import logout
 import requests,json
 from .decorators import *
 
-server_url = "http://10.15.15.66:8080/test"
-#server_url = "http://localhost:8080/test"
+#server_url = "http://10.15.15.62:8080/test"
+server_url = "http://localhost:8080/test"
 
 def Logout(request):
 	logout(request)
@@ -290,7 +290,7 @@ def ManagerApplicationDetails(request):
 				da.save()
 				t = Transactions()
 				t.Application_ID = Application_Details.objects.get(Application_ID=app_details.Application_ID)
-				t.Inv_ID_id = il.Inv_ID_id
+				t.Inv_ID = il.Inv_ID_id
 				t.save()
 				for i in range(1,app_details.Tenure+1):
 					ins = Installments()
