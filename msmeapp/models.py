@@ -17,7 +17,6 @@ class Application_Details(models.Model):#Loan
     Tenure=models.IntegerField(default=0)
     Date_Application=models.DateTimeField(default=datetime.now)
     Purpose = models.TextField(max_length=1)
-    Frequency=models.IntegerField(default=0)
     Status=models.CharField(max_length=3)
     Pages=models.IntegerField(default=0)
     

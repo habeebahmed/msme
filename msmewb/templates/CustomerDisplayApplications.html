@@ -112,7 +112,7 @@
             <th scope="col">Tenure</th>
             <th scope="col">Date of Application</th>
             <th scope="col">Purpose</th>
-            <th scope="col">Frequency</th>
+            <!-- <th scope="col">Frequency</th> -->
             <th scope="col">Status</th>
             <th scope="col">Operations</th>
           </tr>
@@ -125,7 +125,7 @@
             <td>{{appln.Tenure}}</td>
             <td>{{appln.Date_Application}}</td>
             <td>{{appln.Purpose}}</td>
-            <td>{{appln.Frequency}}</td>
+            <!-- <td>{{appln.Frequency}}</td> -->
             <td>{{appln.Status}}</td>
             <td>
               <button class="btn btn-primary" value={{appln.Application_ID}}><a
@@ -148,14 +148,13 @@
                         <ul class="nav nav-tabs">
                           <li class="active"><a data-toggle="tab" href="#loan">Loan</a></li>
                           <li><a data-toggle="tab" href="#business">Business</a></li>
-                          <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-                          <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+                          <li><a data-toggle="tab" href="#contact">Contact</a></li>
                         </ul>
                         <div class="tab-content">
                           <div id="loan" class="tab-pane fade in active">
                             <div class="form-group">
                               <label for="Amount">Loan Amount:</label>
-                              <input type="text" class="form-control" id="Amount">
+                              <input type="text" class="form-control" name="Amount" id="Amount">
                             </div>
                             <div class="form-group">
                               <label for="Purpose">Purpose:</label>
@@ -170,11 +169,11 @@
                               <input type="text" id="Tenure" name="Tenure" class="form-control form-control-lg"
                                 required>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                               <label for="Frequency">Frequency:</label>
                               <input type="text" id="Frequency" name="Frequency" class="form-control form-control-lg"
                                 required>
-                            </div>
+                            </div> -->
 
                           </div>
                           <div id="business" class="tab-pane fade">
@@ -191,8 +190,6 @@
                               <input type="text" id="BPAN" name="BPAN" placeholder='Business PAN ID'
                                 class="form-control form-control-lg">
                               <br>
-                              <label for="B_est">Establishment Date</label>
-                              <input type="Date" id="B_est" name="B_est" class="form-control form-control-lg">
                               <div>Business Address:<br>
                                 <label for="HNO">House No:</label>
                                 <input type="text" id="HNO" name="HNO" placeholder='House Number'
@@ -251,42 +248,120 @@
                                 <select id="Country" name="Country" class="form-control form-control-lg">
                                   <option value=""> </option>
                                   <option value="India">India</option>
-                                </select><label for="Purpose">Purpose:</label>
-                                <select name="Purpose" id="Purpose" class="form-control form-control-lg" required>
-                                  <option value="A">Expansion</option>
-                                  <option value="B">Capital</option>
-                                  <option value="C">Wages</option>
                                 </select>
-                              </div>
-                              <div class="form-group">
-                                <label for="Tenure">Tenure(6-12m):</label>
-                                <input type="text" id="Tenure" name="Tenure" class="form-control form-control-lg"
-                                  required>
-                              </div>
-                              <div class="form-group">
+                                <!-- <div class="form-group">
                                 <label for="Frequency">Frequency:</label>
                                 <input type="text" id="Frequency" name="Frequency" class="form-control form-control-lg"
                                   required>
+                              </div> -->
                               </div>
                             </div>
-                            </div>
-                            <div id="menu2" class="tab-pane fade">
-                              <h3>Menu 2</h3>
-                              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam.</p>
-                            </div>
-                            <div id="menu3" class="tab-pane fade">
-                              <h3>Menu 3</h3>
-                              <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                explicabo.</p>
+                          </div>
+                          <div id="contact" class="tab-pane fade">
+                            <div class="form-group">
+
+                              <label for="AName">Name:</label>
+                              <input type="text" id="AName" name="AName" class="form-control form-control-lg">
+                              <br>
+
+
+                              <label for="AAge">Age:</label>
+                              <input type="Number" id="AAge" name="AAge" class="form-control form-control-lg">
+                              <br>
+
+                              <br>
+                              <label for="AGender">Gender:</label>
+                              <input type="radio" name="Agender" id="M" value="M"> Male
+                              <input type="radio" name="Agender" id="F" value="F"> Female
+                              <input type="radio" name="Agender" id="O" value="O"> Other
+                              <br>
+                              <br>
+                              <label for="AMobile Number">Mobile Number:</label>
+                              <br>
+                              <input type="Number" id="Amobile" name="Amobile" class="form-control form-control-lg">
+                              <br>
+                              <label for="AEmail id">Email id:</label>
+                              <br>
+                              <input type="email" id="Aemail" name="Aemail" class="form-control form-control-lg">
+                              <br>
+
+                              <label for="APAN">PAN:</label>
+                              <br>
+                              <input type="text" id="Apan" name="Apan" class="form-control form-control-lg">
+                              <br>
+                              <label for="AHNO">House No:</label>
+                              <br>
+                              <input type="text" id="AHNO" name="AHNO" class="form-control form-control-lg">
+                              <br>
+                              <label for="AArea">Area:</label>
+                              <br>
+                              <input type="text" id="Aarea" name="Aarea" class="form-control form-control-lg">
+                              <br>
+                              <label for="AStreet">Street:</label>
+                              <br>
+                              <input type="text" id="Astreet" name="Astreet" class="form-control form-control-lg">
+                              <br>
+                              <label for="APincode">Pincode:</label>
+                              <br>
+                              <input type="Number" id="Apincode" name="Apincode" class="form-control form-control-lg">
+                              <br>
+                              <label for="ACountry">Country:</label>
+                              <select id="Acountry" name="Acountry" class="form-control form-control-lg">
+                                <option value=""> </option>
+                                <option value="India">India</option>
+                              </select>
+                              <br>
+
+                              <label for="AState">State:</label>
+                              <select id="AState" name="Astate" onchange="changeList(this,'ACity'); "
+                                class="form-control form-control-lg">
+                                <option value=""> </option>
+                                <option value="AndhraPradesh">Andhra Pradesh</option>
+                                <option value="ArunachalPradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa </option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="HimachalPradesh">Himachal Pradesh</option>
+                                <option value="JammuandKashmir">Jammu and Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="MadhyaPradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan </option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="TamilNadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="UttarPradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="WestBengal">West Bengal</option>
+                              </select>
+
+                              <br>
+
+                              <label for="ACity">City:</label>
+                              <br>
+                              <select id="ACity" name="ACity" class="form-control form-control-lg">
+                              </select>
+
                             </div>
                           </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-primary">Save</button>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
                       </div>
+                      <div class="modal-footer">
+                        <button type="submit" name="Edit" id="Edit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -323,11 +398,268 @@
       var objSelect = document.getElementById("Purpose");
       setSelectedValue(objSelect, purpose);
       document.getElementById("Tenure").value = appln.Tenure;
-      document.getElementById("Frequency").value = appln.Frequency
+      // document.getElementById("Frequency").value = appln.Frequency
+      document.getElementById("Edit").value = appln.Application_ID
       document.getElementById("BusinessName").value = appln.business.B_name
+      document.getElementById("Bmobile").value = appln.business.B_contact;
+      document.getElementById("BPAN").value = appln.business.B_PAN;
+      document.getElementById("HNO").value = appln.b_addr.B_House_No;
+      document.getElementById("area").value = appln.b_addr.B_Locality;
+      document.getElementById("pincode").value = appln.b_addr.B_PINCode;
+      document.getElementById("street").value = appln.b_addr.B_Street;
+      valueToSet = appln.b_addr.B_State
+      state = document.getElementById("State");
+      setSelectedValue(state, valueToSet)
+      var c = appln.b_addr.B_City
+      var city = document.getElementById("City");
+      var opt = document.createElement('option');
+      opt.value = c;
+      opt.text = c;
+      opt.selected = true;
+      city.options.add(opt);
+      valueToSet = appln.b_addr.B_Country
+      var country = document.getElementById("Country");
+      setSelectedValue(country, valueToSet)
+      document.getElementById("AName").value = appln.applicant.Applicant_Name;
+      document.getElementById("AAge").value = appln.applicant.Applicant_Age;
+      if(appln.applicant.Applicant_Gender == 'M'){
+        document.getElementById("M").checked = true;
+      }
+      else if(appln.applicant.Applicant_Gender == 'F') {
+        document.getElementById("F").checked = true;
+      }
+      else {
+        document.getElementById("O").checked = true
+      }
+      document.getElementById("Amobile").value = appln.applicant.Applicant_Mobile_No;
+      document.getElementById("Aemail").value = appln.applicant.Applicant_Email;
+      document.getElementById("Apan").value = appln.applicant.Applicant_PAN;
+      document.getElementById("AHNO").value = appln.a_addr.A_House_No;
+      document.getElementById("Astreet").value = appln.a_addr.A_Street;
+      document.getElementById("Aarea").value = appln.a_addr.A_Locality;      
+      Country = document.getElementById("Acountry");
+      var valueToSet = appln.a_addr.A_Country
+      setSelectedValue(Country,valueToSet)
+      var State = document.getElementById("AState");
+      valueToSet = appln.a_addr.A_State
+      setSelectedValue(State,valueToSet)
+      var City = document.getElementById("ACity");
+      var opt = document.createElement('option');
+      opt.value = appln.a_addr.A_City;
+      opt.text = appln.a_addr.A_City;
+      opt.selected = true;
+      City.options.add(opt);
+      document.getElementById("Apincode").value = appln.a_addr.A_PINCode;
 
     }
+    function changeList(State, City) {
+      var ArunachalPradesh = new Array('', 'Along', 'Basar', 'Bomdila', 'Itanagar', 'Khonsa', 'Margherita');
+      var AndhraPrdesh = new Array('', 'Vishakapatnam', 'Kurnool', 'Anantapur', 'Amaravati', 'Dharmavaram');
+      var Assam = new Array('', 'Guwahati', 'Silchar', 'Dibrugarh', 'Jorhat', 'Nagaon', 'Tin sukia', 'Tezpur');
+      var Bihar = new Array('', 'Patna', 'Purnia', 'katihar', 'Saharsa', 'Motihari', 'Sitamarhi');
+      var Chhattisgarh = new Array('', 'Raipur', 'Bilaspur', 'Rajnandgaon', 'Ambikapur', 'Chirmiri', 'Dhamtari');
+      var Goa = new Array('', 'Bicholim', 'Manpusa', 'Panaji', 'Quepem', 'Valpoi');
+      var Gujarat = new Array('', 'Ahmedabad', 'Surat ', 'Vadodara', 'Rajkot');
+      var Haryana = new Array('', 'Faridabad', 'Panipat', 'Ambala', 'Hisar');
+      var HimachalPradesh = new Array('', 'Shimla', 'Manali', 'Dharamshala', 'Dalhousie');
+      var JammuandKashmir = new Array('', 'Jammu', 'Srinagar', 'Leh', 'Gulmarg');
+      var Jharkhand = new Array('', 'Jamshedpur', 'Ranchi', 'Dhanbad', 'Bokaro Steel City');
+      var Karnataka = new Array('', 'Bengalore', 'Mangalore', 'Hubli', 'Belgaum');
+      var Kerala = new Array('', 'Kochi', 'Thiruvananthapuram', 'Kollam', 'Kannur');
+      var MadhyaPradesh = new Array('', 'Indore', 'Bhopal', 'Jabalpur', 'Gwalior');
+      var Maharashtra = new Array('', 'Mumbai', 'Pune', 'Nagpur', 'Nasik');
+      var Manipur = new Array('', 'Imphal East', 'Imphal West', 'Kakching', 'Bishnupur');
+      var Meghalaya = new Array('', 'Shillong', 'Tura', 'Cherrapunji', 'Mawsynram');
+      var Mizoram = new Array('', 'Aizawl', 'Champai', 'Linglei', 'Thenzawl');
+      var Nagaland = new Array('', 'Kohima', 'Dimapur', 'Wokha', 'Tuensang');
+      var Odisha = new Array('', 'Bhusbaneswar', 'Cuttack', 'Sambalpur', 'Rourkela');
+      var Punjab = new Array('', 'Chandigarh', 'Ludhiana', 'Jalandhar', 'Amritsar');
+      var Rajasthan = new Array('', 'Jaipur', 'Jodhpur', 'Udaipur', 'Jaisalmer');
+      var Sikkim = new Array('', 'Gangtok', 'Pelling', 'Lachung', 'Lachen');
+      var TamilNadu = new Array('', 'Chennai', 'Coimbatore', 'Madurai', 'Ooty');
+      var Telangana = new Array('', 'Hyderabad', 'Warangal', 'Khammam', 'Nizamabad');
+      var Tripura = new Array('', 'Agartala', 'Dharmanagar', 'Amarpur', 'Kamalpur');
+      var UttarPradesh = new Array('', 'Lucknow', 'Varanasi', 'Kanpur', 'Agra');
+      var Uttarakhand = new Array('', 'Dehradun', 'Rishikesh', 'Haridwar', 'Mussoorie');
+      var WestBengal = new Array('', 'Kolkata', 'Siliguri', 'Asansol', 'Kharagpur');
 
+      switch (State.value) {
+        case 'ArunachalPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < ArunachalPradesh.length; i++) { createOption(document.getElementById(City), ArunachalPradesh[i], ArunachalPradesh[i]); }
+          break;
+        case 'AndhraPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < AndhraPradesh.length; i++) {
+            createOption(document.getElementById(City), AndhraPradesh[i], AndhraPradesh[i]);
+          }
+          break;
+        case 'Assam':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Assam.length; i++) {
+            createOption(document.getElementById(City), Assam[i], Assam[i]);
+          }
+          break;
+        case 'Bihar':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Bihar.length; i++) {
+            createOption(document.getElementById(City), Bihar[i], Bihar[i]);
+          }
+          break;
+        case 'Chhattisgarh':
+          document.getElementById(Destination).options.length = 0;
+          for (i = 0; i < Chhattisgarh.length; i++) {
+            createOption(document.getElementById(Destination), Chhattisgarh[i], Chhattisgarh[i]);
+          }
+
+          break;
+        case 'Goa':
+          document.getElementById(Destination).options.length = 0;
+          for (i = 0; i < Goa.length; i++) {
+            createOption(document.getElementById(Destination), Goa[i], Goa[i]);
+          }
+          break;
+        case 'Gujarat':
+          document.getElementById(Destination).options.length = 0;
+          for (i = 0; i < Gujarat.length; i++) {
+            createOption(document.getElementById(Destination), Gujarat[i], Gujarat[i]);
+          }
+          break;
+        case 'Haryana':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Haryana.length; i++) {
+            createOption(document.getElementById(City), Haryana[i], Haryana[i]);
+          }
+          break;
+        case 'HimachalPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < HimachalPradesh.length; i++) {
+            createOption(document.getElementById(City), HimachalPradesh[i], HimachalPradesh[i]);
+          }
+          break;
+        case 'JammuandKashmir':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < JammuandKashmir.length; i++) {
+            createOption(document.getElementById(City), JammuandKashmir[i], JammuandKashmir[i]);
+          }
+          break;
+        case 'Jharkhand':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Jharkhand.length; i++) {
+            createOption(document.getElementById(City), Jharkhand[i], Jharkhand[i]);
+          }
+          break;
+        case 'Karnataka':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Karnataka.length; i++) {
+            createOption(document.getElementById(City), Karnataka[i], Karnataka[i]);
+          }
+          break;
+        case 'Kerala':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Kerala.length; i++) {
+            createOption(document.getElementById(City), Kerala[i], Kerala[i]);
+          }
+          break;
+        case 'MadhyaPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < MadhyaPradesh.length; i++) {
+            createOption(document.getElementById(City), MadhyaPradesh[i], MadhyaPradesh[i]);
+          }
+          break;
+        case 'Maharashtra':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Maharashtra.length; i++) {
+            createOption(document.getElementById(City), Maharashtra[i], Maharashtra[i]);
+          }
+          break;
+        case 'Manipur':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Manipur.length; i++) {
+            createOption(document.getElementById(City), Manipur[i], Manipur[i]);
+          }
+          break;
+        case 'Meghalaya':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Meghalaya.length; i++) {
+            createOption(document.getElementById(City), Meghalaya[i], Meghalaya[i]);
+          }
+          break;
+        case 'Nagaland':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Nagaland.length; i++) {
+            createOption(document.getElementById(City), Nagaland[i], Nagaland[i]);
+          }
+          break;
+        case 'Odisha':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Odisha.length; i++) {
+            createOption(document.getElementById(City), Odisha[i], Odisha[i]);
+          }
+          break;
+        case 'Punjab':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Punjab.length; i++) {
+            createOption(document.getElementById(City), Punjab[i], Punjab[i]);
+          }
+          break;
+        case 'Rajasthan':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Rajasthan.length; i++) {
+            createOption(document.getElementById(City), Rajasthan[i], Rajasthan[i]);
+          }
+          break;
+        case 'Sikkim':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Sikkim.length; i++) {
+            createOption(document.getElementById(City), Sikkim[i], Sikkim[i]);
+          }
+          break;
+        case 'TamilNadu':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < TamilNadu.length; i++) {
+            createOption(document.getElementById(City), TamilNadu[i], TamilNadu[i]);
+          }
+          break;
+        case 'Telangana':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Telangana.length; i++) {
+            createOption(document.getElementById(City), Telangana[i], Telangana[i]);
+          }
+          break;
+        case 'Tripura':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Tripura.length; i++) {
+            createOption(document.getElementById(City), Tripura[i], Tripura[i]);
+          }
+          break;
+        case 'UttarPradesh':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < UttarPradesh.length; i++) {
+            createOption(document.getElementById(City), UttarPradesh[i], UttarPradesh[i]);
+          }
+          break;
+        case 'Uttarakhand':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < Uttarakhand.length; i++) {
+            createOption(document.getElementById(City), Uttarakhand[i], Uttarakhand[i]);
+          }
+          break;
+        case 'WestBengal':
+          document.getElementById(City).options.length = 0;
+          for (i = 0; i < WestBengal.length; i++) {
+            createOption(document.getElementById(City), WestBengal[i], WestBengal[i]);
+          }
+          break;
+      }
+    }
+
+    function createOption(State, text, value) {
+      var opt = document.createElement('option');
+      opt.value = value;
+      opt.text = text;
+      State.options.add(opt);
+    }
   </script>
 
 </body>

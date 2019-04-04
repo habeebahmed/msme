@@ -16,6 +16,11 @@ from dateutil.relativedelta import relativedelta
 from .decorator import *
 template_html = '../templates/email.html'
 
+
+#Home
+def Index(request):
+	return render(request,'index.html',{})
+
 #Application_Details
 def Loan(request):
 	if request.method=="POST":
@@ -30,7 +35,7 @@ def Loan(request):
 		Loan_app.Tenure = request.POST.get("Tenure")
 		Loan_app.Date_Application = datetime.now()
 		Loan_app.Purpose = request.POST.get("Purpose")
-		Loan_app.Frequency = request.POST.get("Frequency")
+		#Loan_app.Frequency = request.POST.get("Frequency")
 		Loan_app.Status = "IP"
 		request.session['Loan'] = {
 			'amt': request.POST.get("Amount"),

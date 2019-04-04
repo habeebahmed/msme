@@ -67,6 +67,46 @@ def CustomerDisplayApplications(request):
 	request.session.set_expiry(request.session.get_expiry_age())
 	#api call
 	#a = Application_Details.objects.exclude(Status='BL')
+	if request.method == "POST" and "Edit" in request.POST:
+		appln_id = request.POST.get('Edit')
+		print("Edit->",appln_id)
+		Loan_app = Application_Details.objects.get(Application_ID=appln_id)
+		Loan_app.Amount =request.POST.get("Amount")
+		Loan_app.Tenure = request.POST.get("Tenure")
+		Loan_app.Purpose = request.POST.get("Purpose")
+		Loan_app.save()
+		bd = Business_Details.objects.get(Application_ID=appln_id)
+		bd.B_name = request.POST.get("BusinessName")
+		bd.B_PAN = request.POST.get("BPAN")
+		bd.B_contact = request.POST.get("Bmobile")
+		bad=Business_Addr.objects.get(B_ID=bd.B_ID)
+		bad.B_House_No = request.POST.get("HNO")
+		bad.B_Street = request.POST.get("street")
+		bad.B_Locality = request.POST.get("area")
+		bad.B_City = request.POST.get("City")
+		bad.B_PINCode = request.POST.get("pincode")
+		bad.B_State = request.POST.get("state")
+		bad.B_Country = request.POST.get("Country")
+		bd.save()
+		bad.save()
+		cd=Applicant_Details.objects.get(Application_ID=appln_id)
+		cd.Applicant_Name = request.POST.get("AName")
+		cd.Applicant_Age = request.POST.get("AAge")
+		cd.Applicant_Gender = request.POST.get("Agender")
+		cd.Applicant_Mobile_No = request.POST.get("Amobile")
+		cd.Applicant_Email = request.POST.get("Aemail")
+		cad=Applicant_Addr.objects.get(Applicant_ID_id=cd.id)
+		cad.A_House_No = request.POST.get("AHNO")
+		cad.A_Street = request.POST.get("Astreet")
+		cad.A_Locality = request.POST.get("Aarea")
+		cad.A_City = request.POST.get("ACity")
+		cad.A_PINCode = request.POST.get("Apincode")
+		cad.A_State = request.POST.get("Astate")
+		cad.A_Country = request.POST.get("Acountry")
+		cd.save()
+		cad.save()
+		return redirect('CustomerDisplayApplications')
+
 	data = {
 		"table" : "application_details",
  		"status" : "BL"
@@ -84,7 +124,7 @@ def CustomerDisplayApplications(request):
 		app['business'] = b_detail
 		app['a_addr'] = a_addr
 		app['b_addr'] = b_addr
-	print(a)
+	#print(a)
 	if request.method == "POST" and "Logout" in request.POST:
 		 return redirect('Logout')
 	return render(request,'CustomerDisplayApplications.html',{'applications': a})

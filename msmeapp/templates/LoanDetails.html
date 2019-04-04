@@ -24,9 +24,9 @@
 			var purpose = document.getElementById("Purpose").value;
 			var tenure = document.getElementById("Tenure").value;
 			var tenurechk = /^[0-9]{1,2}$/;
-			var frequency = document.getElementById("Frequency").value;
-			var frequencychk = /^[0-9]{1,2}$/;
-			if (purpose == "" || tenure == "" || frequency == "") {
+			// var frequency = document.getElementById("Frequency").value;
+			// var frequencychk = /^[0-9]{1,2}$/;
+			if (purpose == "" || tenure == "" ) {
 				alert("please fill all the fields");
 				document.getElementById("Purpose").focus();
 				return false
@@ -36,11 +36,11 @@
 				document.getElementById("Tenure").focus();
 				return false
 			}
-			else if (!frequencychk.test(frequency)) {
-				alert("frequency should be in digits");
-				document.getElementById("Frequqncy").focus();
-				return false
-			}
+			// else if (!frequencychk.test(frequency)) {
+			// 	alert("frequency should be in digits");
+			// 	document.getElementById("Frequqncy").focus();
+			// 	return false
+			// }
 			else {
 				return true
 				document.forms["Loan"].submit();
@@ -114,7 +114,7 @@
 			<div class="slidecontainer">
 				<input type="range" min="10000" max="150000" name="Amount" value="{{Loan.amt}}" ||'30000' class="slider"
 					id="myRange" step="1000" required>
-				<p>Rs: <span id="demo"></span></p>
+				<p>INR: <span id="demo"></span></p>
 			</div>
 			<!--Java script code for slider-->
 			<script>
@@ -132,12 +132,17 @@
 			<!--<label for="Amount">Amount:</label>
 					<input type="text" id="Amount" name="Amount">-->
 			<br>
+			<div id="content">
 			<label for="Purpose">Purpose:</label>
+			<div class="help-tip" style="right: -466px;">
+				<p>For what use are you taking the business loan ?</p>
+			</div>
 			<select name="Purpose" id="Purpose" class="form-control form-control-lg" required>
 				<option value="A">Expansion</option>
 				<option value="B">Capital</option>
 				<option value="C">Wages</option>
 			</select>
+			</div>
 			<br>
 			<script>
 				//Get select object
@@ -158,13 +163,19 @@
 					}
 				}
 			</script>
-			<label for="Tenure">Tenure(6-12m):</label>
+			<label for="Tenure">Tenure:</label>
+			<div class="help-tip" style="right: -477px;">
+				<p>Enter loan tenure between 6-12 months</p>
+			</div>
 			<input type="text" id="Tenure" name="Tenure" value="{{Loan.tenure}}" ||'12' class="form-control form-control-lg"
 				required>
 			<br>
-			<label for="Frequency">Frequency:</label>
+			<!-- <label for="Frequency">Frequency:</label>
+			<div class="help-tip" style="right: -450px;">
+				<p>Loan Repayment fequency in months</p>
+			</div>
 			<input type="text" id="Frequency" name="Frequency" value="{{Loan.frequency}}" ||'12'
-				class="form-control form-control-lg" required>
+				class="form-control form-control-lg" required> -->
 			<br>
 			<button type="submit" onsubmit="Post">Next</button>
 			<!-- <script>

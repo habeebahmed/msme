@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib import admin
 from . import views
 
+
 urlpatterns = [
 	path('Login', views.LoginWB, name='LoginWB'),
 	path('CustomerDashBoardWB', views.CustomerDashBoardWB, name='CustomerDashBoardWB'),
